@@ -12,7 +12,7 @@ export const TableBodyMasuk = ({
   onClick,
 }) => {
   return (
-    <tr key={id}>
+    <tr id="pesananmap-masuk">
       <td className="px-2"></td>
       <td className="px-2 py-6 text-start whitespace-no-wrap font-normal text-[19px] border-t border-gray-400">
         {id}

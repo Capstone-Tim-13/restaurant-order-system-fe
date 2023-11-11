@@ -3,7 +3,7 @@ import { Select } from "@mantine/core";
 
 export const TableBodyProses = ({ id, date, name, address, total }) => {
   return (
-    <tr>
+    <tr id="pesananmap-proses">
       <td className="px-2"></td>
       <td className="px-2 py-6 text-start whitespace-no-wrap font-normal text-[19px] border-b border-gray-400">
         {id}

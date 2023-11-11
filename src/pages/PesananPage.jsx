@@ -128,7 +128,7 @@ const PesananPage = () => {
         </h1>
         <table className="min-w-full mb-5">
           <thead>
-            <TableHeadPesanan />
+            <TableHeadPesanan id="head-pesanan" />
           </thead>
           <tbody>
             {filteredData.map((item) => (
@@ -159,7 +159,7 @@ const PesananPage = () => {
           </h1>
           <table className="min-w-full mb-5">
             <thead>
-              <TableHeadPesanan />
+              <TableHeadPesanan id="head-pesanan" />
             </thead>
             <tbody>
               {filteredData.map((item) => (
