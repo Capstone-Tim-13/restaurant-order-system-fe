@@ -1,42 +1,43 @@
-import { Route, Routes } from 'react-router-dom';
-import AppShell from '../components/templates/AppShell';
-import Dashboard from '../pages/Dashboard';
+import { Route, Routes } from "react-router-dom";
+import AppShell from "../components/templates/AppShell";
+import Dashboard from "../pages/Dashboard";
+import LoginPage from "../pages/LoginPage";
 
 export default function root() {
   const dataRoute = [
     {
-      path: '/',
+      path: "/",
       element: <h1>Landing Page</h1>,
-      middleware: 'guest',
+      middleware: "guest",
     },
     {
-      path: '/login',
-      element: <h1>Login</h1>,
-      middleware: 'guest',
+      path: "/login",
+      element: <LoginPage />,
+      middleware: "guest",
     },
     {
-      path: '/admin',
+      path: "/admin",
       element: <AppShell />,
-      middleware: 'guest',
+      middleware: "guest",
       withChildren: [
         {
-          path: '/',
+          path: "/",
           element: <Dashboard />,
         },
         {
-          path: '/analisis',
+          path: "/analisis",
           element: <h1>Analisis</h1>,
         },
         {
-          path: '/pesanan',
+          path: "/pesanan",
           element: <h1>Pesanan</h1>,
         },
         {
-          path: '/menu',
+          path: "/menu",
           element: <h1>Menu</h1>,
         },
         {
-          path: '/rating',
+          path: "/rating",
           element: <h1>Rating</h1>,
         },
       ],
@@ -49,15 +50,14 @@ export default function root() {
         <Route
           key={index}
           path={route.path}
-          element={
-            route.middleware === 'guest' ? route.element : route.element
-          }>
+          element={route.middleware === "guest" ? route.element : route.element}
+        >
           {route.withChildren?.map((outlet, index) => (
             <Route
               key={index}
               path={route.path + outlet.path}
               element={
-                outlet.middleware === 'guest' ? outlet.element : outlet.element
+                outlet.middleware === "guest" ? outlet.element : outlet.element
               }
             />
           ))}
