@@ -15,6 +15,8 @@ import RATING_ACTIVE_ICON from './icons/rating_active_icon.svg';
 import LOGOUT_ICON from './icons/logout_icon.svg';
 import LOGOUT_ACTIVE_ICON from './icons/logout_active_icon.svg';
 
+import SEARCH_ICON from './icons/search_icon.svg'
+
 export {
   LOGO_ALTARESTO,
   BG_ADMIN,
@@ -31,4 +33,5 @@ export {
   RATING_ACTIVE_ICON,
   LOGOUT_ICON,
   LOGOUT_ACTIVE_ICON,
+  SEARCH_ICON,
 };
