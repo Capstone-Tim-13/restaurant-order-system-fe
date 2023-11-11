@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import AppShell from "../components/templates/AppShell";
 import Dashboard from "../pages/Dashboard";
 import LoginPage from "../pages/LoginPage";
+import Menu from '../pages/Menu';
 
 export default function root() {
   const dataRoute = [
@@ -34,7 +35,7 @@ export default function root() {
         },
         {
           path: "/menu",
-          element: <h1>Menu</h1>,
+          element: <Menu />,
         },
         {
           path: "/rating",
@@ -45,7 +46,7 @@ export default function root() {
   ];
 
   return (
-    <Routes>
+    <Routes>.
       {dataRoute.map((route, index) => (
         <Route
           key={index}
