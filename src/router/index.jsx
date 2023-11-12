@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import AppShell from "../components/templates/AppShell";
 import Dashboard from "../pages/Dashboard";
+import PesananPage from "../pages/PesananPage";
 import LoginPage from "../pages/LoginPage";
 import Menu from '../pages/Menu';
 
@@ -31,7 +32,7 @@ export default function root() {
         },
         {
           path: "/pesanan",
-          element: <h1>Pesanan</h1>,
+          element: <PesananPage />,
         },
         {
           path: "/menu",

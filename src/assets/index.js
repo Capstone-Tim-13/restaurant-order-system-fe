@@ -20,6 +20,7 @@ import MENU_TERJUAL_ICON from './icons/menu_terjual_icon.svg';
 import TOTAL_PESANAN_ICON from './icons/total_pesanan_icon.svg';
 import PELANGGAN_ICON from './icons/pelanggan_icon.svg';
 import PEMASUKAN_ICON from './icons/pemasukan_icon.svg';
+import SEARCH_ICON from './icons/search_icon.svg'
 
 export {
   LOGO_ALTARESTO,
@@ -38,6 +39,7 @@ export {
   RATING_ACTIVE_ICON,
   LOGOUT_ICON,
   LOGOUT_ACTIVE_ICON,
+  SEARCH_ICON,
   BG_LOGIN,
   MENU_TERJUAL_ICON,
   TOTAL_PESANAN_ICON,
