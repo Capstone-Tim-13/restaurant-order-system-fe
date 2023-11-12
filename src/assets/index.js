@@ -1,6 +1,7 @@
 import LOGO_ALTARESTO from './images/logo_altaresto.png';
 import BG_ADMIN from './images/bg_admin.png';
 import DEFAULT_PROFILE_ADMIN from './images/default_profile_admin.png';
+import DEFAULT_FOTO_MAKANAN from './images/default_foto_makanan.png';
 import LECI from'./images/leci.jpg'
 import KENTANG from './images/kentang.jpg'
 import RAFFI from './images/raffi.jpg'
