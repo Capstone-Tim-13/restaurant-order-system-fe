@@ -1,9 +1,11 @@
-import LOGO_ALTARESTO from "./images/logo_altaresto.png";
-import BG_ADMIN from "./images/bg_admin.png";
-import DEFAULT_PROFILE_ADMIN from "./images/default_profile_admin.png";
-import DEFAULT_FOTO_MAKANAN from './images/default_foto_makanan.png';
+import LOGO_ALTARESTO from './images/logo_altaresto.png';
+import BG_ADMIN from './images/bg_admin.png';
+import DEFAULT_PROFILE_ADMIN from './images/default_profile_admin.png';
+import LECI from'./images/leci.jpg'
+import KENTANG from './images/kentang.jpg'
+import RAFFI from './images/raffi.jpg'
+import DIAGRAM from './images/diagram.png'
 import BG_LOGIN from "./images/bg_login.png";
-
 import DASHBOARD_ICON from "./icons/dashboard_icon.svg";
 import DASHBOARD_ACTIVE_ICON from "./icons/dashboard_active_icon.svg";
 import ANALISIS_ICON from "./icons/analisis_icon.svg";
@@ -45,4 +47,8 @@ export {
   TOTAL_PESANAN_ICON,
   PELANGGAN_ICON,
   PEMASUKAN_ICON,
+  LECI,
+  KENTANG,
+  RAFFI,
+  DIAGRAM
 };

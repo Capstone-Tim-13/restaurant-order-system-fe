@@ -5,7 +5,7 @@ export default function NavlinkIcon({ isActive, icon }) {
     <div
       className={cn(
         'p-[14px] grid place-items-center w-max h-max rounded-full',
-        {
+        { 
           'bg-white': isActive,
           'bg-primary': !isActive,
         }

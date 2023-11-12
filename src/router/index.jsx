@@ -4,6 +4,7 @@ import Dashboard from "../pages/Dashboard";
 import PesananPage from "../pages/PesananPage";
 import LoginPage from "../pages/LoginPage";
 import Menu from '../pages/Menu';
+import AnalisisPage from '../pages/AnalisisPage';
 
 export default function root() {
   const dataRoute = [
@@ -27,8 +28,8 @@ export default function root() {
           element: <Dashboard />,
         },
         {
-          path: "/analisis",
-          element: <h1>Analisis</h1>,
+          path: '/analisis',
+          element: <AnalisisPage/>,
         },
         {
           path: "/pesanan",
