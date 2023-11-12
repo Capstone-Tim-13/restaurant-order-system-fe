@@ -9,6 +9,8 @@ export default {
         white: '#FCFCFC',
         black: '#000000',
         brown: '#783525',
+        surface: '#737373',
+        orange: '#E25E3E',
       },
       fontFamily: {
         poppins: ['Poppins', 'sans-serif'],
