@@ -1,6 +1,10 @@
 import LOGO_ALTARESTO from './images/logo_altaresto.png';
 import BG_ADMIN from './images/bg_admin.png';
 import DEFAULT_PROFILE_ADMIN from './images/default_profile_admin.png';
+import LECI from'./images/leci.jpg'
+import KENTANG from './images/kentang.jpg'
+import RAFFI from './images/raffi.jpg'
+import DIAGRAM from './images/diagram.png'
 
 import DASHBOARD_ICON from './icons/dashboard_icon.svg';
 import DASHBOARD_ACTIVE_ICON from './icons/dashboard_active_icon.svg';
@@ -31,4 +35,8 @@ export {
   RATING_ACTIVE_ICON,
   LOGOUT_ICON,
   LOGOUT_ACTIVE_ICON,
+  LECI,
+  KENTANG,
+  RAFFI,
+  DIAGRAM
 };

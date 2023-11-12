@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import AppShell from '../components/templates/AppShell';
 import Dashboard from '../pages/Dashboard';
+import AnalisisPage from '../pages/AnalisisPage';
 
 export default function root() {
   const dataRoute = [
@@ -25,7 +26,7 @@ export default function root() {
         },
         {
           path: '/analisis',
-          element: <h1>Analisis</h1>,
+          element: <h1><AnalisisPage/></h1>,
         },
         {
           path: '/pesanan',
