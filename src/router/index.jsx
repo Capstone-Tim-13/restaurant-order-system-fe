@@ -3,8 +3,9 @@ import AppShell from "../components/templates/AppShell";
 import Dashboard from "../pages/Dashboard";
 import PesananPage from "../pages/PesananPage";
 import LoginPage from "../pages/LoginPage";
-import Menu from '../pages/Menu';
-import AnalisisPage from '../pages/AnalisisPage';
+import Menu from "../pages/Menu";
+import AnalisisPage from "../pages/AnalisisPage";
+import MenuConvert from "../pages/ConvertMenuPage";
 
 export default function root() {
   const dataRoute = [
@@ -28,8 +29,8 @@ export default function root() {
           element: <Dashboard />,
         },
         {
-          path: '/analisis',
-          element: <AnalisisPage/>,
+          path: "/analisis",
+          element: <AnalisisPage />,
         },
         {
           path: "/pesanan",
@@ -43,26 +44,21 @@ export default function root() {
           path: "/rating",
           element: <h1>Rating</h1>,
         },
+        {
+          path: "/menuconvert",
+          element: <MenuConvert />,
+        },
       ],
     },
   ];
 
   return (
-    <Routes>.
+    <Routes>
+      .
       {dataRoute.map((route, index) => (
-        <Route
-          key={index}
-          path={route.path}
-          element={route.middleware === "guest" ? route.element : route.element}
-        >
+        <Route key={index} path={route.path} element={route.middleware === "guest" ? route.element : route.element}>
           {route.withChildren?.map((outlet, index) => (
-            <Route
-              key={index}
-              path={route.path + outlet.path}
-              element={
-                outlet.middleware === "guest" ? outlet.element : outlet.element
-              }
-            />
+            <Route key={index} path={route.path + outlet.path} element={outlet.middleware === "guest" ? outlet.element : outlet.element} />
           ))}
         </Route>
       ))}
