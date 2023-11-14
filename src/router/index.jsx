@@ -1,51 +1,52 @@
-import { Route, Routes } from "react-router-dom";
-import AppShell from "../components/templates/AppShell";
-import Dashboard from "../pages/Dashboard";
-import PesananPage from "../pages/PesananPage";
-import LoginPage from "../pages/LoginPage";
-import Menu from "../pages/Menu";
-import AnalisisPage from "../pages/AnalisisPage";
-import MenuConvert from "../pages/ConvertMenuPage";
+import { Route, Routes } from 'react-router-dom';
+import AppShell from '../components/templates/AppShell';
+import Dashboard from '../pages/Dashboard';
+import PesananPage from '../pages/PesananPage';
+import LoginPage from '../pages/LoginPage';
+import Menu from '../pages/Menu';
+import RetingPage from '../pages/RetingPage';
+import AnalisisPage from '../pages/AnalisisPage';
+import MenuConvert from '../pages/ConvertMenuPage';
 
 export default function root() {
   const dataRoute = [
     {
-      path: "/",
+      path: '/',
       element: <h1>Landing Page</h1>,
-      middleware: "guest",
+      middleware: 'guest',
     },
     {
-      path: "/login",
+      path: '/login',
       element: <LoginPage />,
-      middleware: "guest",
+      middleware: 'guest',
     },
     {
-      path: "/admin",
+      path: '/admin',
       element: <AppShell />,
-      middleware: "guest",
+      middleware: 'guest',
       withChildren: [
         {
-          path: "/",
+          path: '/',
           element: <Dashboard />,
         },
         {
-          path: "/analisis",
+          path: '/analisis',
           element: <AnalisisPage />,
         },
         {
-          path: "/pesanan",
+          path: '/pesanan',
           element: <PesananPage />,
         },
         {
-          path: "/menu",
+          path: '/menu',
           element: <Menu />,
         },
         {
-          path: "/rating",
-          element: <h1>Rating</h1>,
+          path: '/rating',
+          element: <RetingPage />,
         },
         {
-          path: "/menuconvert",
+          path: '/menuconvert',
           element: <MenuConvert />,
         },
       ],
@@ -54,11 +55,10 @@ export default function root() {
 
   return (
     <Routes>
-      .
       {dataRoute.map((route, index) => (
-        <Route key={index} path={route.path} element={route.middleware === "guest" ? route.element : route.element}>
+        <Route key={index} path={route.path} element={route.middleware === 'guest' ? route.element : route.element}>
           {route.withChildren?.map((outlet, index) => (
-            <Route key={index} path={route.path + outlet.path} element={outlet.middleware === "guest" ? outlet.element : outlet.element} />
+            <Route key={index} path={route.path + outlet.path} element={outlet.middleware === 'guest' ? outlet.element : outlet.element} />
           ))}
         </Route>
       ))}
