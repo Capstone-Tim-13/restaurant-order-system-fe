@@ -26,6 +26,10 @@ import CHECKLIST_BUTTON from './icons/CeklistButton.svg';
 import SEND_BUTTON from './icons/Send_Button.svg';
 import CEKLIST_CIRCLE from './icons/ceklist_circle.svg';
 import CLOSE_CIRCLE from './icons/close_circle.svg';
+import LECI from './images/leci.jpg';
+import KENTANG from './images/kentang.jpg';
+import RAFFI from './images/raffi.jpg';
+import DIAGRAM from './images/diagram.png';
 
 export {
   LOGO_ALTARESTO,
@@ -55,4 +59,8 @@ export {
   SEND_BUTTON,
   CEKLIST_CIRCLE,
   CLOSE_CIRCLE,
+  LECI,
+  KENTANG,
+  RAFFI,
+  DIAGRAM
 };
