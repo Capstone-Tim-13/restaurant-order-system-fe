@@ -5,7 +5,7 @@ import { Rating, Select } from '@mantine/core';
 import img from '../../assets/images/potato.png';
 
 export default function RetingAppAntrian(props) {
-  const { datas } = props;
+  const { datas, formatTanggal } = props;
   const [detailReview, setDetailReview] = useState(false);
 
   const DataSelects = [
@@ -19,23 +19,23 @@ export default function RetingAppAntrian(props) {
   return (
     <div className={`w-full mt-10 pb-10 px-10 pt-10 bg-white rounded-2xl shadow-md relative ${detailReview ? '' : 'overflow-hidden h-[950px]'}`}>
       <h1 className="text-3xl font-semibold font-poppins">Antrian</h1>
-      <button onClick={() => setDetailReview(!detailReview)} className={`fontpopins text-black absolute ${detailReview ? 'bottom-12' : 'bottom-6'} right-10 text-sm font-semibold`}>
+      <button onClick={() => setDetailReview(!detailReview)} className={`fontpopins text-black absolute ${detailReview ? 'bottom-12' : 'bottom-11'} right-10 text-sm font-semibold`}>
         {detailReview ? 'Sembunyikan' : 'Lihat Lainnya'}
       </button>
 
       {datas.map((data) => (
         <>
           {/* Bagian Judul */}
-          <div className="mt-10 flex items-center justify-between">
+          <div className="mt-10 flex justify-between">
             {/* Bagian Profile User */}
-            <div className="w-1/4 flex gap-6 items-center ">
+            <div className="w-1/4 flex gap-6 pt-10 ">
               <div>
                 <img src={img} alt="" className="rounded-full" />
               </div>
               <div>
                 <p className="font-poppins text-xl text-orange font-light">#KJL23FS</p>
                 <h2 className="font-poppins text-xl font-semibold mt-1">Rizky </h2>
-                <p className="font-poppins text-surface font-semibold">{data.tanggal}</p>
+                <p className="font-poppins text-surface font-semibold">{formatTanggal(data.tanggal)}</p>
               </div>
             </div>
 

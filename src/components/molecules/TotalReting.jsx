@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
 import { Progress, Rating } from '@mantine/core';
-import { STAR_ICON_2 } from '../../assets';
+import { PEN_REVIEW, STAR_ICON_2, STAR_RETING } from '../../assets';
+import Tooltip from '../atoms/Tooltip';
 
 const initialRating = [
   {
@@ -32,10 +33,12 @@ export default function TotalReting() {
     <>
       {/* Total Review 1 */}
       <div className="w-[288px] bg-white rounded-2xl shadow-md p-4">
-        <img src="" alt="" />
+        <img src={PEN_REVIEW} alt="icon" className="mb-5" />
         <div className="flex items-center mt-2">
           <h1 className="text-3xl font-semibold font-poppins lowercase">10.0K</h1>
-          <p className="font-poppins text-xl text-green-600">+2.5%</p>
+          <Tooltip title="2k" withArrow>
+            <p className="font-poppins text-xl text-green-600">+2.5%</p>
+          </Tooltip>
         </div>
         <h2 className="font-semibold font-poppins text-[15px] mt-2">Total Review</h2>
         <p className="font-poppins text-surface text-[12px] -mt-1">Kenaikan review yang masuk bulan ini</p>
@@ -43,7 +46,7 @@ export default function TotalReting() {
 
       {/* Total Review 2 */}
       <div className="w-[306px] bg-white rounded-2xl shadow-md p-4">
-        <img src="" alt="" />
+        <img src={STAR_RETING} alt="icon" className="mb-5" />
         <div className="flex items-center mt-2 gap-2">
           <h1 className="text-3xl font-semibold font-poppins lowercase">{valueRating}</h1>
           <Rating defaultValue={valueRating} count={5} />
@@ -53,7 +56,7 @@ export default function TotalReting() {
       </div>
 
       {/* Total Review 3 */}
-      <div className="w-[455px] bg-white rounded-2xl shadow-md px-4 py-6">
+      <div className="w-[455px] bg-white rounded-2xl shadow-md px-4 py-10">
         {initialRating.map((rating, index) => (
           <div key={index} className="flex gap-2 items-center">
             <div className="flex gap-1 justify-center relative">
