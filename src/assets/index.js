@@ -30,6 +30,8 @@ import LECI from './images/leci.jpg';
 import KENTANG from './images/kentang.jpg';
 import RAFFI from './images/raffi.jpg';
 import DIAGRAM from './images/diagram.png';
+import PEN_REVIEW from './icons/pen_review.svg';
+import STAR_RETING from './icons/star_reting.svg';
 
 export {
   LOGO_ALTARESTO,
@@ -62,5 +64,7 @@ export {
   LECI,
   KENTANG,
   RAFFI,
-  DIAGRAM
+  DIAGRAM,
+  PEN_REVIEW,
+  STAR_RETING,
 };

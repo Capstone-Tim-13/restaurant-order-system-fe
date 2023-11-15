@@ -5,7 +5,7 @@ import { CloseButton, Rating } from '@mantine/core';
 import img from '../../assets/images/potato.png';
 
 export default function RetingWebPublish(props) {
-  const { datas } = props;
+  const { datas, formatTanggal } = props;
   const [detailReview, setDetailReview] = useState(false);
 
   return (
@@ -27,7 +27,7 @@ export default function RetingWebPublish(props) {
               <div>
                 <p className="font-poppins text-xl text-orange font-light">#KJL23FS</p>
                 <h2 className="font-poppins text-xl font-semibold mt-1">Rizky </h2>
-                <p className="font-poppins text-surface font-semibold">9/11/10 13:10 WIB</p>
+                <p className="font-poppins text-surface font-semibold">{formatTanggal(data.tanggal)}</p>
               </div>
             </div>
 

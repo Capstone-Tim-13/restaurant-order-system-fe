@@ -5,7 +5,7 @@ import { CloseButton, Rating } from '@mantine/core';
 import img from '../../assets/images/potato.png';
 
 export default function RetingAppPublish(props) {
-  const { datas } = props;
+  const { datas, formatTanggal } = props;
   const [detailReview, setDetailReview] = useState(false);
 
   return (
@@ -18,16 +18,16 @@ export default function RetingAppPublish(props) {
       {datas.map((data) => (
         <>
           {/* Bagian Judul */}
-          <div className="mt-10 flex items-center justify-between">
+          <div className="mt-10 flex  justify-between">
             {/* Bagian Profile User */}
-            <div className="w-1/4 flex gap-6 items-center ">
+            <div className="w-1/4 flex gap-6  pt-10">
               <div>
                 <img src={img} alt="" className="rounded-full" />
               </div>
               <div>
                 <p className="font-poppins text-xl text-orange font-light">#KJL23FS</p>
-                <h2 className="font-poppins text-xl font-semibold mt-1">Rizky </h2>
-                <p className="font-poppins text-surface font-semibold">{data.tanggal}</p>
+                <h2 className="font-poppins text-xl font-semibold mt-1">Rizky</h2>
+                <p className="font-poppins text-surface font-semibold">{formatTanggal(data.tanggal)}</p>
               </div>
             </div>
 

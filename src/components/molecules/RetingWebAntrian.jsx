@@ -26,7 +26,7 @@ export default function RetingWebAntrian(props) {
       {datas.map((data) => (
         <>
           {/* Bagian Judul */}
-          <div className="mt-10 flex justify-between gap-5">
+          <div key={data.id} className="mt-10 flex justify-between gap-5">
             {/* Bagian Profile User */}
             <div className="w-1/4 flex gap-6">
               <div>
