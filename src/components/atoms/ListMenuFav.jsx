@@ -31,8 +31,9 @@
       axios
         .get("https://654b5d435b38a59f28eef00e.mockapi.io/makanan")
         .then((response) => {
-          setData(response.data);
-          setRatings(Array(response.data.length).fill(0));
+          const sortedData = response.data.sort((a, b) => b.likes - a.likes);
+          setData(sortedData);
+          setRatings(Array(sortedData.length).fill(0));
         })
         .catch((error) => {
           console.error("Error fetching data: ", error);
@@ -56,10 +57,10 @@
               className="w-16 h-16 rounded-full mx-left mb-4"
             />
             <div className="w-full px-5 py-2 text-sm text-left font-poppins font-semibold">
-              {item.nama}
+              Kentang Goreng
               <div className="flex justify-between">
                 <div className="flex flex-col text-xl text-center font-poppins font-semibold text-gray-500 mt-2">
-                  {item.rating}
+                    4.5
                   <div style={styles.container} className="text-center">
                     {[...Array(5)].map((_, starIndex) => (
                       <FaStar
@@ -75,10 +76,10 @@
                         onClick={() => handleClick(index, starIndex + 1)}
                       />
                     ))}
-                    <div className="text-xs font-poppins font-normal text-gray-500 px-1 pt-3 py-2">
+                     <div className="text-xs font-poppins font-normal text-gray-500 px-1 pt-3 py-2">
                       ({item.review} Review)
                     </div>
-                  </div>
+                    </div>
                 </div>
   
                 <div style={styles.container}>

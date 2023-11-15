@@ -1,14 +1,14 @@
-import { RAFFI } from "../../assets";
+// import { RAFFI } from "../../assets";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const applicants = [
-  {
-    name: "Raffi Ahmad",
-    image: RAFFI,
-    order: "60 kali order"
-  },
-];
+// const applicants = [
+//   {
+//     name: "Raffi Ahmad",
+//     image: RAFFI,
+//     order: "60 kali order"
+//   },
+// ];
 
 export default function ListTopPel() {
   const [data, setData] = useState([]);
@@ -18,7 +18,8 @@ export default function ListTopPel() {
     axios
       .get("https://654b5d435b38a59f28eef00e.mockapi.io/pelanggan")
       .then((response) => {
-        setData(response.data);
+        const sortedData = response.data.sort((a, b) => b.order - a.order);
+        setData(sortedData);
       })
       .catch((error) => {
         console.error("Error fetching data: ", error);
