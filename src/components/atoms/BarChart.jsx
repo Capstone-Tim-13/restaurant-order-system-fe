@@ -11,17 +11,16 @@ const formatRupiah = (value) => {
 
 
 export default function BarChart({ selectedOption }) {
-  const chartRef = useRef(null);
+  const chartRef = useRef(selectedOption);
+  const chartInstance = useRef(null); // Simpan referensi ke instance diagram.
 
   useEffect(() => {
     console.log('Selected Option:', selectedOption);
-    const DATA_COUNT = selectedOption === 'bulan' ? 12 : 3;
 
-    const labels = selectedOption === 'bulan' ? [
+    const DATA_COUNT = 12;
+    const labels = [
       'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'
-    ] : [
-      '2021', '2022', '2023' // Contoh tahun, sesuaikan sesuai kebutuhan
-    ];  
+    ]
 
     const data = {
       labels: labels,
@@ -64,16 +63,22 @@ export default function BarChart({ selectedOption }) {
     };
 
     const ctx = chartRef.current.getContext('2d');
-    const chartInstance = new Chart(ctx, config);
 
+    // Hancurkan instance sebelumnya jika ada
+    if (chartInstance.current) {
+      chartInstance.current.destroy();
+    }
+
+    // Inisialisasi diagram baru
+    chartInstance.current = new Chart(ctx, config);
+
+    // Pastikan untuk menghancurkan diagram saat komponen tidak lagi digunakan
     return () => {
-      chartInstance.destroy();
+      chartInstance.current.destroy();
     };
   }, [selectedOption]);
 
   return (
-    <canvas ref={chartRef} width={100} height={50}>
-    </canvas>
-    
+    <canvas ref={chartRef} width={100} height={50}></canvas>
   );
 }
