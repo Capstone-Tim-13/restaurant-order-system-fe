@@ -1,11 +1,11 @@
-import LOGO_ALTARESTO from './images/logo_altaresto.png';
-import BG_ADMIN from './images/bg_admin.png';
-import DEFAULT_FOTO_MAKANAN from './images/default_foto_makanan.png';
-import DEFAULT_PROFILE_ADMIN from './images/default_profile_admin.png';
-import LECI from'./images/leci.jpg'
-import KENTANG from './images/kentang.jpg'
-import RAFFI from './images/raffi.jpg'
-import DIAGRAM from './images/diagram.png'
+import LOGO_ALTARESTO from "./images/logo_altaresto.png";
+import BG_ADMIN from "./images/bg_admin.png";
+import DEFAULT_FOTO_MAKANAN from "./images/default_foto_makanan.png";
+import DEFAULT_PROFILE_ADMIN from "./images/default_profile_admin.png";
+import LECI from "./images/leci.jpg";
+import KENTANG from "./images/kentang.jpg";
+import RAFFI from "./images/raffi.jpg";
+import DIAGRAM from "./images/diagram.png";
 import BG_LOGIN from "./images/bg_login.png";
 import DASHBOARD_ICON from "./icons/dashboard_icon.svg";
 import DASHBOARD_ACTIVE_ICON from "./icons/dashboard_active_icon.svg";
@@ -19,11 +19,13 @@ import RATING_ICON from "./icons/rating_icon.svg";
 import RATING_ACTIVE_ICON from "./icons/rating_active_icon.svg";
 import LOGOUT_ICON from "./icons/logout_icon.svg";
 import LOGOUT_ACTIVE_ICON from "./icons/logout_active_icon.svg";
-import MENU_TERJUAL_ICON from './icons/menu_terjual_icon.svg';
-import TOTAL_PESANAN_ICON from './icons/total_pesanan_icon.svg';
-import PELANGGAN_ICON from './icons/pelanggan_icon.svg';
-import PEMASUKAN_ICON from './icons/pemasukan_icon.svg';
-import SEARCH_ICON from './icons/search_icon.svg'
+import MENU_TERJUAL_ICON from "./icons/menu_terjual_icon.svg";
+import TOTAL_PESANAN_ICON from "./icons/total_pesanan_icon.svg";
+import PELANGGAN_ICON from "./icons/pelanggan_icon.svg";
+import PEMASUKAN_ICON from "./icons/pemasukan_icon.svg";
+import SEARCH_ICON from "./icons/search_icon.svg";
+import MENU_TAMBAH_KATEGORI_ICON from "./icons/menu_tambah_kategori_icon.svg";
+import MENU_ADD_ICON from "./icons/menu_add_icon.svg";
 
 export {
   LOGO_ALTARESTO,
@@ -43,6 +45,8 @@ export {
   LOGOUT_ICON,
   LOGOUT_ACTIVE_ICON,
   SEARCH_ICON,
+  MENU_TAMBAH_KATEGORI_ICON,
+  MENU_ADD_ICON,
   BG_LOGIN,
   MENU_TERJUAL_ICON,
   TOTAL_PESANAN_ICON,
@@ -51,5 +55,5 @@ export {
   LECI,
   KENTANG,
   RAFFI,
-  DIAGRAM
+  DIAGRAM,
 };

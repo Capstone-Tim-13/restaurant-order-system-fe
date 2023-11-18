@@ -6,6 +6,7 @@ import LoginPage from "../pages/LoginPage";
 import Menu from "../pages/Menu";
 import AnalisisPage from "../pages/AnalisisPage";
 import MenuConvert from "../pages/ConvertMenuPage";
+import TambahMenuPage from "../pages/TambahMenuPage";
 
 export default function root() {
   const dataRoute = [
@@ -48,6 +49,10 @@ export default function root() {
           path: "/menuconvert",
           element: <MenuConvert />,
         },
+        {
+          path: "/menutambah",
+          element: <TambahMenuPage />,
+        },
       ],
     },
   ];
@@ -56,9 +61,19 @@ export default function root() {
     <Routes>
       .
       {dataRoute.map((route, index) => (
-        <Route key={index} path={route.path} element={route.middleware === "guest" ? route.element : route.element}>
+        <Route
+          key={index}
+          path={route.path}
+          element={route.middleware === "guest" ? route.element : route.element}
+        >
           {route.withChildren?.map((outlet, index) => (
-            <Route key={index} path={route.path + outlet.path} element={outlet.middleware === "guest" ? outlet.element : outlet.element} />
+            <Route
+              key={index}
+              path={route.path + outlet.path}
+              element={
+                outlet.middleware === "guest" ? outlet.element : outlet.element
+              }
+            />
           ))}
         </Route>
       ))}
