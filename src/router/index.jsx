@@ -7,6 +7,8 @@ import Menu from '../pages/Menu';
 import RetingPage from '../pages/RetingPage';
 import AnalisisPage from '../pages/AnalisisPage';
 import MenuConvert from '../pages/ConvertMenuPage';
+import TambahMenuPage from "../pages/TambahMenuPage";
+
 
 export default function root() {
   const dataRoute = [
@@ -48,6 +50,10 @@ export default function root() {
         {
           path: '/menuconvert',
           element: <MenuConvert />,
+        },
+        {
+          path: "/menutambah",
+          element: <TambahMenuPage />,
         },
       ],
     },
