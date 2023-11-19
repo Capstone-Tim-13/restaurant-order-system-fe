@@ -11,6 +11,7 @@ export default {
         brown: '#783525',
         surface: '#737373',
         orange: '#E25E3E',
+        greenPublish: '#009735',
       },
       fontFamily: {
         poppins: ['Poppins', 'sans-serif'],
