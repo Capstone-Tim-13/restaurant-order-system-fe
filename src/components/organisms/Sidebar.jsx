@@ -3,6 +3,7 @@ import { LOGO_ALTARESTO } from '../../assets';
 import NavLink from '../molecules/NavLink';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../store/slices/authSlice';
+import { notifySuccess } from '../atoms/Toast';
 
 export default function Sidebar({ dataLinks }) {
   const dispatch = useDispatch();
@@ -23,7 +24,10 @@ export default function Sidebar({ dataLinks }) {
         <NavLink
           id="navlink-logout"
           dataLink={logoutLink}
-          onClick={() => dispatch(logout())}
+          onClick={() => {
+            dispatch(logout());
+            notifySuccess('Logout Success', 'logout');
+          }}
         />
       );
     }
