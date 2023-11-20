@@ -27,7 +27,7 @@ import PEMASUKAN_ICON from "./icons/pemasukan_icon.svg";
 import SEARCH_ICON from "./icons/search_icon.svg";
 import MENU_TAMBAH_KATEGORI_ICON from "./icons/menu_tambah_kategori_icon.svg";
 import MENU_ADD_ICON from "./icons/menu_add_icon.svg";
-import STAR_ICON_2 from "./icons/star_icon_2.svg";
+import STAR_ICON_2 from './icons/star_icon2.svg';
 import CHECKLIST_BUTTON from "./icons/CeklistButton.svg";
 import SEND_BUTTON from "./icons/Send_Button.svg";
 import CEKLIST_CIRCLE from "./icons/ceklist_circle.svg";
