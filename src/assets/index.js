@@ -29,7 +29,7 @@ import MENU_TAMBAH_KATEGORI_ICON from "./icons/menu_tambah_kategori_icon.svg";
 import MENU_ADD_ICON from "./icons/menu_add_icon.svg";
 import STAR_ICON_2 from './icons/star_icon2.svg';
 import CHECKLIST_BUTTON from "./icons/CeklistButton.svg";
-import SEND_BUTTON from "./icons/Send_Button.svg";
+import SEND_BUTTON from './icons/send_button1.svg';
 import CEKLIST_CIRCLE from "./icons/ceklist_circle.svg";
 import CLOSE_CIRCLE from "./icons/close_circle.svg";
 import PEN_REVIEW from "./icons/pen_review.svg";
