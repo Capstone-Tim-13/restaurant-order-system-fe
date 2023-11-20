@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Routes } from 'react-router-dom';
 import AppShell from '../components/templates/AppShell';
 import Dashboard from '../pages/Dashboard';
 import PesananPage from '../pages/PesananPage';
@@ -8,10 +8,10 @@ import RetingPage from '../pages/RetingPage';
 import AnalisisPage from '../pages/AnalisisPage';
 import MenuConvert from '../pages/ConvertMenuPage';
 import TambahMenuPage from "../pages/TambahMenuPage";
-
+import renderRoute from './renderRoute';
 
 export default function root() {
-  const dataRoute = [
+  const routes = [
     {
       path: '/',
       element: <h1>Landing Page</h1>,
@@ -25,7 +25,7 @@ export default function root() {
     {
       path: '/admin',
       element: <AppShell />,
-      middleware: 'guest',
+      middleware: 'admin',
       withChildren: [
         {
           path: '/',
@@ -52,7 +52,7 @@ export default function root() {
           element: <MenuConvert />,
         },
         {
-          path: "/menutambah",
+          path: '/menutambah',
           element: <TambahMenuPage />,
         },
       ],
@@ -60,14 +60,6 @@ export default function root() {
   ];
 
   return (
-    <Routes>
-      {dataRoute.map((route, index) => (
-        <Route key={index} path={route.path} element={route.middleware === 'guest' ? route.element : route.element}>
-          {route.withChildren?.map((outlet, index) => (
-            <Route key={index} path={route.path + outlet.path} element={outlet.middleware === 'guest' ? outlet.element : outlet.element} />
-          ))}
-        </Route>
-      ))}
-    </Routes>
+    <Routes>{routes.map((route, index) => renderRoute(route, index))}</Routes>
   );
 }

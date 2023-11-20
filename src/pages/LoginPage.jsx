@@ -1,24 +1,27 @@
 import { LoginForm } from "../components/organisms/LoginForm";
 import { BG_LOGIN, LOGO_ALTARESTO } from "../assets";
-import { useState } from "react";
-import * as Yup from "yup";
+import { useState } from 'react';
+import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { loginAdmin } from '../store/actions/authAsync';
 
 function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [errors, setErrors] = useState({});
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email(),
-    password: Yup.string().min(8, "Kata sandi minimal 8 karakter"),
+    password: Yup.string().min(8, 'Kata sandi minimal 8 karakter'),
   });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       await validationSchema.validate({ email, password });
-      console.log({ email, password, rememberMe });
+      dispatch(loginAdmin({ email, password, rememberMe }));
     } catch (error) {
       setErrors({ ...errors, [error.path]: error.message });
     }
