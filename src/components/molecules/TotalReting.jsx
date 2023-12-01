@@ -49,7 +49,7 @@ export default function TotalReting() {
         <img src={STAR_RETING} alt="icon" className="mb-5" />
         <div className="flex items-center mt-2 gap-2">
           <h1 className="text-3xl font-semibold font-poppins lowercase">{valueRating}</h1>
-          <Rating defaultValue={valueRating} count={5} />
+          <Rating defaultValue={valueRating} count={5} readOnly />
         </div>
         <h2 className="font-semibold font-poppins text-[15px] mt-2">Rata-rata rating</h2>
         <p className="font-poppins text-surface text-[12px] -mt-1">Rata-rata bulan ini</p>
