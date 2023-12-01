@@ -13,7 +13,7 @@ export default function ListPermintaanPesanan({
   customerAddress,
 }) {
   return (
-    <div className="flex gap-5 w-[800px] justify-between items-center">
+    <div className="flex gap-5 w-[750px] justify-between items-center">
       <div className="flex items-center gap-5">
         <img
           src={imgUrl || DEFAULT_FOTO_MAKANAN}
@@ -22,7 +22,7 @@ export default function ListPermintaanPesanan({
         />
         <div className="flex flex-col gap-1">
           <h1 className="font-medium">{name}</h1>
-          <p className="text-[12px] text-black/80 w-[200px] whitespace-nowrap overflow-hidden overflow-ellipsis">
+          <p className="text-[12px] text-black/80 w-[150px] whitespace-nowrap overflow-hidden overflow-ellipsis">
             Catatan : {note ? note : '-'}
           </p>
           <p className="text-[12px] text-[#E25E3E]">{orderCode}</p>
@@ -40,7 +40,7 @@ export default function ListPermintaanPesanan({
       </div>
       <div
         className={cn(
-          'p-3 w-[130px] text-center rounded-3xl font-semibold capitalize',
+          'p-3 w-[120px] text-center rounded-3xl font-semibold capitalize',
           {
             'bg-green-200 text-green-700': status?.toLowerCase() === 'terkirim',
             'bg-red-200 text-red-700': status?.toLowerCase() === 'dibatalkan',

@@ -12,9 +12,12 @@ export default function NavLink({ id, dataLink, onClick }) {
       id={id}
       onClick={onClick}
       state={{ from: location }}
-      className={cn('flex items-center gap-4 p-3 rounded-l-full text-primary', {
-        'bg-primary text-white': active,
-      })}>
+      className={cn(
+        'flex items-center gap-4 p-3 pr-8 rounded-l-full text-primary',
+        {
+          'bg-primary text-white': active,
+        }
+      )}>
       <NavlinkIcon icon={dataLink.icon} isActive={active} />
       <p className="text-xl font-medium">{dataLink.title}</p>
     </Link>

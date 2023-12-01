@@ -13,16 +13,16 @@ import RingkasanPenjualan from '../components/organisms/RingkasanPenjualan';
 
 export default function Dashboard() {
   return (
-    <div className="flex flex-col gap-7">
+    <div className="flex flex-col gap-3">
       <div className="flex justify-between">
         <CountStatistic data={countStatisticDatas} />
         <SelectMonth />
       </div>
-      <div className="flex gap-5">
+      <div className="flex gap-3 flex-wrap">
         <RingkasanPenjualan />
         <PetaPelanggan />
       </div>
-      <div className="flex gap-5">
+      <div className="flex gap-3 flex-wrap">
         <PermintaanPesanan />
         <InfoTransaksi />
       </div>

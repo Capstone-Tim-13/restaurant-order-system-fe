@@ -50,7 +50,7 @@ export default function ChartPenjualan({ datas }) {
   }, [datas]);
 
   return (
-    <div className="bg-white w-[700px]">
+    <div className="bg-white w-[650px]">
       <Chart type="line" data={chartData} options={chartOptions} />
     </div>
   );

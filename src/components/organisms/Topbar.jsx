@@ -4,7 +4,7 @@ import { DEFAULT_PROFILE_ADMIN } from '../../assets';
 
 export default function Topbar({ title }) {
   return (
-    <div className="sticky top-0 w-full h-max bg-white shadow-md z-20 p-8 flex items-center justify-between">
+    <div className="sticky top-0 w-full h-max bg-white shadow-md z-20 p-8 pl-16 flex items-center justify-between">
       <h1 className="text-[30px] font-semibold">{title}</h1>
       <div className="flex items-center gap-10">
         <div className="flex items-center gap-12 text-brown">
