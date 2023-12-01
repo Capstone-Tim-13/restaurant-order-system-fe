@@ -1,6 +1,4 @@
 import React from "react";
-import { GoXCircleFill, GoCheckCircleFill } from "react-icons/go";
-import { IconContext } from "react-icons";
 
 export const TableBodyMasuk = ({
   id,
@@ -59,14 +57,13 @@ export const TableBodyMasuk = ({
         Rp. {total}
       </td>
       <td className="border-b border-gray-400 px-0 mx-0">
-        <div className="flex gap-5 px-0">
-          <IconContext.Provider value={{ color: "#D31515", size: "26px" }}>
-            <GoXCircleFill onClick={onClick} />
-          </IconContext.Provider>
-          <IconContext.Provider value={{ color: "#009735", size: "26px" }}>
-            <GoCheckCircleFill />
-          </IconContext.Provider>
-        </div>
+        <button
+          type="button"
+          className="bg-greenPublish text-white rounded-full font-semibold text-[1rem] py-2 px-4"
+          onClick={onClick}
+        >
+          Terima
+        </button>
       </td>
       <td className="px-2"></td>
     </tr>
