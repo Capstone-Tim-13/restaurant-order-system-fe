@@ -1,6 +1,6 @@
+import { IoMdNotifications } from 'react-icons/io';
 import { MdEmail } from 'react-icons/md';
 import { DEFAULT_PROFILE_ADMIN } from '../../assets';
-import NotifPesanan from './NotifPesanan';
 
 export default function Topbar({ title }) {
   return (
@@ -8,7 +8,7 @@ export default function Topbar({ title }) {
       <h1 className="text-[30px] font-semibold">{title}</h1>
       <div className="flex items-center gap-10">
         <div className="flex items-center gap-12 text-brown">
-          <NotifPesanan />
+          <IoMdNotifications size={45} />
           <MdEmail size={45} />
         </div>
         <div className="flex items-center gap-5 border-l pl-10 border-gray-300">
