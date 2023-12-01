@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Switch, Burger, Loader } from '@mantine/core';
+import { DOTS_THREE } from '../../assets';
 
 export default function TbodyMolecules(props) {
   const { img, datas, loading } = props;
@@ -39,7 +40,7 @@ export default function TbodyMolecules(props) {
             <p className="text-sm ml-2">{isChecked[data.id] ? 'Tersedia' : 'Kosong'}</p>
 
             <div className="relative flex">
-              <Burger opened={opened[data.id] || false} onClick={() => toggleRow(data.id)} size={18} className="ml-5" />
+              <img src={DOTS_THREE} opened={opened[data.id] || false} onClick={() => toggleRow(data.id)} className="ml-5 w-8 cursor-pointer rounded-full" />
               <div className={`flex flex-col w-28 bg-white rounded-sm shadow-md overflow-hidden absolute -right-32 -top-7 ${opened[data.id] ? 'block' : 'hidden'}`}>
                 <button className="hover:bg-orange hover:text-white px-5 py-2">Edit</button>
                 <button className="hover:bg-orange hover:text-white px-5 py-2">Hapus</button>

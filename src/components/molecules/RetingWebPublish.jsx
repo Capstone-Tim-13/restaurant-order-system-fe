@@ -36,7 +36,7 @@ export default function RetingWebPublish(props) {
               <div className="w-2/3">
                 <div className="flex gap-3">
                   <p className="font-poppins text-surface font-semibold">3.0</p>
-                  <Rating value={3} variant="unstyled" />
+                  <Rating value={3} variant="unstyled" readOnly />
                 </div>
                 <div className="mt-3">
                   <p className="font-poppins text-surface font-ligh text-lg">{data.komentar}</p>
