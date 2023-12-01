@@ -22,7 +22,12 @@ export const loginAdmin = createAsyncThunk(
         : localStorage.removeItem('token');
       return token;
     } catch (error) {
-      notifyError('Login Failed,', 'login');
+      notifyError(
+        `Login Failed, ${
+          error.response.data.response.message || 'Server Error'
+        }`,
+        'login'
+      );
       console.log(error.response.data.response.message);
       throw error;
     }

@@ -1,14 +1,14 @@
-import { IoMdNotifications } from 'react-icons/io';
 import { MdEmail } from 'react-icons/md';
 import { DEFAULT_PROFILE_ADMIN } from '../../assets';
+import NotifPesanan from './NotifPesanan';
 
 export default function Topbar({ title }) {
   return (
-    <div className="sticky top-0 w-full h-max bg-white shadow-md z-20 p-8 flex items-center justify-between">
+    <div className="sticky top-0 w-full h-max bg-white shadow-md z-20 p-8 pl-16 flex items-center justify-between">
       <h1 className="text-[30px] font-semibold">{title}</h1>
       <div className="flex items-center gap-10">
         <div className="flex items-center gap-12 text-brown">
-          <IoMdNotifications size={45} />
+          <NotifPesanan />
           <MdEmail size={45} />
         </div>
         <div className="flex items-center gap-5 border-l pl-10 border-gray-300">
