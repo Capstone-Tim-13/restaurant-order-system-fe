@@ -18,7 +18,7 @@ export const LoginForm = ({
   return (
     <form className=" w-11/12" onSubmit={handleSubmit}>
       <FormField
-        type="email"
+        type="text"
         name="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
