@@ -3,12 +3,13 @@ import AppShell from "../components/templates/AppShell";
 import Dashboard from "../pages/Dashboard";
 import LoginPage from "../pages/LoginPage";
 import Menu from '../pages/Menu';
+import LandingPage from "../pages/LandingPage";
 
 export default function root() {
   const dataRoute = [
     {
       path: "/",
-      element: <h1>Landing Page</h1>,
+      element: <LandingPage />,
       middleware: "guest",
     },
     {
