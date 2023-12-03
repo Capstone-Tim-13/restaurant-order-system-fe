@@ -4,6 +4,7 @@ import Dashboard from '../pages/Dashboard';
 import PesananPage from '../pages/PesananPage';
 import LoginPage from '../pages/LoginPage';
 import Menu from '../pages/Menu';
+import LandingPage from "../pages/LandingPage";
 import RetingPage from '../pages/RetingPage';
 import AnalisisPage from '../pages/AnalisisPage';
 import MenuConvert from '../pages/ConvertMenuPage';
@@ -13,9 +14,9 @@ import renderRoute from './renderRoute';
 export default function root() {
   const routes = [
     {
-      path: '/',
-      element: <h1>Landing Page</h1>,
-      middleware: 'guest',
+      path: "/",
+      element: <LandingPage />,
+      middleware: "guest",
     },
     {
       path: '/login',
