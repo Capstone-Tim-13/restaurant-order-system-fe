@@ -9,7 +9,7 @@ const themeSettings = {
       "#d39c8e",
       "#c87e6b",
       "#c26a54",
-      "#bf6048",
+      "#783525",
       "#a8503a",
       "#974632",
       "#853b29",
@@ -18,8 +18,8 @@ const themeSettings = {
   primaryColor: "brown",
 };
 
-export const SwitchField = ({ label, checked, onChange }) => (
+export const SwitchField = ({ label, onChange }) => (
   <MantineProvider theme={themeSettings}>
-    <Switch label={label} checked={checked} onChange={onChange} />
+    <Switch label={label} onChange={onChange} />
   </MantineProvider>
 );

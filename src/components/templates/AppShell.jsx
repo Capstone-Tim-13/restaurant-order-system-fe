@@ -1,4 +1,4 @@
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import Sidebar from '../organisms/Sidebar';
 import Topbar from '../organisms/Topbar';
 import BgAdminDashboard from '../atoms/BgAdminDashboard';
@@ -17,14 +17,14 @@ import {
   RATING_ICON,
 } from '../../assets';
 import { useEffect, useState } from 'react';
-import { useViewportSize } from '@mantine/hooks';
-import { TbDeviceMobileOff } from 'react-icons/tb';
+import { useViewport } from '../../hooks/useViewport';
+import cn from '../../utils/cn';
+import LimitMobileScreen from '../molecules/LimitMobileScreen';
 
 export default function AppShell() {
   const pathname = useLocation().pathname;
   const [title, setTitle] = useState('');
-  const viewportSize = useViewportSize();
-  const isDesktop = viewportSize.width > 1100 && viewportSize.height > 790;
+  const { isDesktop, isMobile } = useViewport();
 
   useEffect(() => {
     const queryTitle = dataLinks.find((item) => item.link === pathname)?.title;
@@ -32,30 +32,22 @@ export default function AppShell() {
     document.title = 'Alta-Resto | ' + queryTitle;
   }, [pathname]);
 
-  return isDesktop ? (
-    <div className="font-poppins flex">
+  if (!isMobile) {
+    return <LimitMobileScreen />;
+  }
+
+  return (
+    <div
+      className={cn('font-poppins', {
+        flex: isDesktop,
+      })}>
       <BgAdminDashboard />
       <Sidebar dataLinks={dataLinks} />
       <div className="w-full flex-1">
         <Topbar title={title} />
-        <div className="relative z-10 p-5 py-7">
+        <div className="relative z-10 p-3 py-5">
           <Outlet />
         </div>
-      </div>
-    </div>
-  ) : (
-    <div className="bg-secondary w-screen h-screen grid place-items-center p-5">
-      <div className="max-w-[400px] text-center flex flex-col items-center gap-5 bg-white rounded-lg p-10 shadow-lg">
-        <TbDeviceMobileOff size={60} className="text-gray-400" />
-        <p className="text-gray-400">
-          Mohon maaf halaman ini tidak mendukung untuk layar handphone. Silahkan
-          beralih ke mode desktop. (min. 1100 x 790)
-        </p>
-        <Link
-          to="/"
-          className="px-5 py-3 rounded-md bg-primary text-white shadow-md cursor-pointer hover:shadow-none transition-all duration-300 mt-5">
-          Home
-        </Link>
       </div>
     </div>
   );

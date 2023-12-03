@@ -13,9 +13,11 @@ export default function MenuOrganism() {
   const [datas, setDatas] = useState([]);
   const [sortedData, setSortedData] = useState(datas);
   const [search, setSearch] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       const api = 'https://654b557f5b38a59f28eee3f9.mockapi.io/products';
       try {
         const response = await axios.get(api);
@@ -24,6 +26,8 @@ export default function MenuOrganism() {
         setSortedData(responseData);
       } catch (error) {
         console.log(error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -79,9 +83,9 @@ export default function MenuOrganism() {
       <div className="w-full bg-white rounded-3xl shadow-lg py-[42px] px-[56px] mt-10">
         <MenuLinkMolecules initalLink={initalLink} allProduct={allProduct} sortByProduct={sortByProduct} handleCLickLink={handleCLickLink} isActive={isActive} />
 
-        <table className="mt-12 w-full font-poppins text-xl">
+        <table className={`mt-12 w-full font-poppins text-xl ${isLoading && 'h-1000'}`}>
           <TheadMolecules />
-          <TbodyMolecules img={DEFAULT_PROFILE_ADMIN} datas={sortedData} />
+          <TbodyMolecules img={DEFAULT_PROFILE_ADMIN} datas={sortedData} loading={isLoading} />
         </table>
       </div>
     </div>

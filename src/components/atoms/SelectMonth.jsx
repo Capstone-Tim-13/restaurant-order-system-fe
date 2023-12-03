@@ -11,7 +11,7 @@ export default function SelectMonth() {
         placeholder="Pick month"
         value={new Date()}
         maxDate={new Date()}
-        className="bg-white p-3 rounded-xl w-max h-max shadow-lg font-poppins font-medium"
+        className="bg-white p-3 rounded-xl w-max h-max shadow-lg font-poppins font-medium whitespace-nowrap"
       />
     </DatesProvider>
   );
