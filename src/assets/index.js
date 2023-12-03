@@ -40,6 +40,7 @@ import KENTANG_GORENG from "./images/kentang_goreng.jpg";
 import DOTS_THREE from "./icons/dots_three.svg";
 import NOTIFICATION_ICON from "./icons/notifikasi_icons.svg";
 import LEFT_CIRCLE_ICON from "./icons/left_circle.svg";
+import ILLUSTRATION_ERROR from "./images/Illustration.svg";
 
 export {
   LOGO_ALTARESTO,
@@ -83,4 +84,5 @@ export {
   DOTS_THREE,
   NOTIFICATION_ICON,
   LEFT_CIRCLE_ICON,
+  ILLUSTRATION_ERROR,
 };
