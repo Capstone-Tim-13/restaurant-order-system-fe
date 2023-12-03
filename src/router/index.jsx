@@ -4,20 +4,19 @@ import Dashboard from '../pages/Dashboard';
 import PesananPage from '../pages/PesananPage';
 import LoginPage from '../pages/LoginPage';
 import Menu from '../pages/Menu';
-import LandingPage from "../pages/LandingPage";
+import LandingPage from '../pages/LandingPage';
 import RetingPage from '../pages/RetingPage';
 import AnalisisPage from '../pages/AnalisisPage';
 import MenuConvert from '../pages/ConvertMenuPage';
-import TambahMenuPage from "../pages/TambahMenuPage";
+import TambahMenuPage from '../pages/TambahMenuPage';
 import renderRoute from './renderRoute';
-import ErrorPage from '../pages/ErrorPage'; 
+import ErrorPage from '../pages/ErrorPage';
 
 export default function root() {
   const routes = [
     {
-      path: "/",
+      path: '/',
       element: <LandingPage />,
-      middleware: "guest",
     },
     {
       path: '/login',
@@ -60,9 +59,8 @@ export default function root() {
       ],
     },
     {
-      path: '*', 
+      path: '*',
       element: <ErrorPage />,
-      middleware: 'guest',
     },
   ];
 

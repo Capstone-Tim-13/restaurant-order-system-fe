@@ -9,10 +9,14 @@ function renderRoute(route, index) {
       key={index}
       path={route.path}
       element={
-        route.middleware === 'guest' ? (
-          <GuestMiddleware>{route.element}</GuestMiddleware>
+        route.middleware ? (
+          route.middleware === 'guest' ? (
+            <GuestMiddleware>{route.element}</GuestMiddleware>
+          ) : (
+            <AdminMiddleware>{route.element}</AdminMiddleware>
+          )
         ) : (
-          <AdminMiddleware>{route.element}</AdminMiddleware>
+          route.element
         )
       }>
       {route.withChildren?.map((outlet, index) =>
