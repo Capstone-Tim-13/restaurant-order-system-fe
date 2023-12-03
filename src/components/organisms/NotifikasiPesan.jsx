@@ -18,7 +18,7 @@ export default function NotifikasiPesan() {
 
       <div id="dropdownNotification" className={`absolute z-20 ${showDropdown ? "" : "hidden"} w-300 h-400 max-w-sm bg-white divide-y divide-gray-100 rounded-lg shadow border top-32 right-80`} aria-labelledby="dropdownNotificationButton">
         <div className="divide-y divide-gray-100">
-          <a href="#" className="flex px-4 py-3 hover:bg-gray-100 border-b">
+          <a href="#" className="flex px-4 py-3 hover:bg-gray-100 border-b ">
             <div className="flex-shrink-0 w-10 h-10 bg-amber-900 rounded-full flex items-center justify-center">
               <img className="" id="notifikasi" src={NOTIFICATION_ICON} />
             </div>
@@ -27,6 +27,7 @@ export default function NotifikasiPesan() {
               <div className="text-black text-sm mb-1.5">menunggu konfirmasi</div>
             </div>
           </a>
+
           <a href="#" className="flex px-4 py-3 hover:bg-gray-100">
             <div className="flex-shrink-0 w-10 h-10 bg-amber-900 rounded-full flex items-center justify-center">
               <img className="" id="pesanan" src={PESANAN_ICON} />
@@ -38,6 +39,7 @@ export default function NotifikasiPesan() {
               </div>
             </div>
           </a>
+
           <a href="#" className="flex px-4 py-3 hover:bg-gray-100">
             <div className="flex-shrink-0 w-10 h-10 bg-amber-900 rounded-full flex items-center justify-center">
               <img className="" id="pesanan" src={PESANAN_ICON} />
@@ -49,6 +51,7 @@ export default function NotifikasiPesan() {
               </div>
             </div>
           </a>
+
           <a href="#" className="flex px-4 py-3 hover:bg-gray-100">
             <div className="flex-shrink-0 w-10 h-10 bg-amber-900 rounded-full flex items-center justify-center">
               <img className="" id="pesanan" src={PESANAN_ICON} />
@@ -60,6 +63,7 @@ export default function NotifikasiPesan() {
               </div>
             </div>
           </a>
+
           <a href="#" className="flex px-4 py-3 hover:bg-gray-100">
             <div className="flex-shrink-0 w-10 h-10 bg-amber-900 rounded-full flex items-center justify-center">
               <img className="" id="pesanan" src={PESANAN_ICON} />
@@ -71,6 +75,7 @@ export default function NotifikasiPesan() {
               </div>
             </div>
           </a>
+
           <Link to="/admin/pesanan" className="flex items-center justify-between px-4 py-3 hover:bg-gray-100 pb-1.5">
             <div className="flex items-center justify-between">
               <div className="text-amber-900 text-sm mb-1.5 pt-1.5 pl-14">Lihat semua notifikasi</div>
