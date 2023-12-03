@@ -2,25 +2,12 @@ import React, { useState } from "react";
 import TableHeadPesanan from "../components/molecules/TableHeadPesanan";
 import { TableBodyMasuk } from "../components/molecules/TableBodyMasuk";
 import { TableBodyProses } from "../components/molecules/TableBodyProses";
-import { SEARCH_ICON } from "../assets";
 import { Select } from "@mantine/core";
 import { KENTANG_GORENG } from "../assets";
 import { IoSearch } from "react-icons/io5";
 import cn from "../utils/cn";
 
 const PesananPage = () => {
-  const [search, setSearch] = useState("");
-  // const [status, setStatus] = useState("Pending");
-  const [isShow, setIsShow] = useState(false);
-
-  const handleSearch = (event) => {
-    setSearch(event.target.value);
-  };
-
-  const failedClick = () => {
-    console.log("clear");
-  };
-
   const data = [
     {
       id: "#355216",
@@ -84,18 +71,39 @@ const PesananPage = () => {
     },
   ];
 
-  const filteredData = data.filter(
-    (item) =>
-      item.name.toLowerCase().includes(search.toLowerCase()) ||
-      item.id.toLowerCase().includes(search.toLowerCase()) ||
-      item.date.toLowerCase().includes(search.toLowerCase()) ||
-      item.address.toLowerCase().includes(search.toLowerCase()) ||
-      item.menu.some((menuItem) =>
-        menuItem.menu.toLowerCase().includes(search.toLowerCase())
-      ) ||
-      item.price.toLowerCase().includes(search.toLowerCase()) ||
-      item.total.toLowerCase().includes(search.toLowerCase())
-  );
+  const [search, setSearch] = useState("");
+  const [isShow, setIsShow] = useState(false);
+  const [isShow2, setIsShow2] = useState(false);
+  const [filter, setFilter] = useState(data);
+
+  const handleSearch = (event) => {
+    const valueInput = event.target.value;
+    setSearch(valueInput);
+
+    const filteredData = filter.filter((item) => {
+      return (
+        item.name.toLowerCase().includes(search.toLowerCase()) ||
+        item.id.toLowerCase().includes(search.toLowerCase()) ||
+        item.date.toLowerCase().includes(search.toLowerCase()) ||
+        item.address.toLowerCase().includes(search.toLowerCase()) ||
+        item.menu.some((menuItem) =>
+          menuItem.menu.toLowerCase().includes(search.toLowerCase())
+        ) ||
+        item.price.toLowerCase().includes(search.toLowerCase()) ||
+        item.total.toLowerCase().includes(search.toLowerCase())
+      );
+    });
+
+    console.log(filter);
+
+    valueInput !== "" ? setFilter(filteredData) : setFilter(data);
+    valueInput === "" ? setIsShow2(isShow2) : setIsShow2(!isShow2);
+    filter.length === 0 ? setIsShow2(!isShow2) : setIsShow2(isShow2);
+  };
+
+  const failedClick = () => {
+    console.log("clear");
+  };
 
   return (
     <>
@@ -163,7 +171,7 @@ const PesananPage = () => {
             <TableHeadPesanan id="head-pesanan" newhead={""} />
           </thead>
           <tbody>
-            {filteredData.map((item) => (
+            {filter.map((item) => (
               <TableBodyMasuk
                 key={item.id}
                 id={item.id}
@@ -178,6 +186,11 @@ const PesananPage = () => {
                 image={KENTANG_GORENG}
               />
             ))}
+            {isShow2 && (
+              <div className="absolute left-[45%] text-[1.4rem] font-semibold">
+                == No result in table ==
+              </div>
+            )}
           </tbody>
         </table>
       </div>
@@ -185,9 +198,13 @@ const PesananPage = () => {
       {/* DIPROSES TABLE */}
       <div className="bg-white rounded-xl shadow-lg flex flex-col gap-5 mt-5 pb-2">
         <div
-          className={cn("h-[480px] overflow-hidden flex flex-col", {
-            "h-max overflow-auto": isShow,
-          })}
+          className={cn(
+            "h-[480px] overflow-hidden flex flex-col",
+            {
+              "h-max overflow-auto": isShow,
+            },
+            { "h-max": isShow2 }
+          )}
         >
           <h1 className="font-semibold text-[24px] mt-6 mb-4 flex justify-self-start ml-8">
             Diproses
@@ -197,7 +214,7 @@ const PesananPage = () => {
               <TableHeadPesanan id="head-pesanan" newhead={"Status"} />
             </thead>
             <tbody>
-              {filteredData.map((item) => (
+              {filter.map((item) => (
                 <TableBodyProses
                   key={item.id}
                   id={item.id}
@@ -211,6 +228,11 @@ const PesananPage = () => {
                   image={KENTANG_GORENG}
                 />
               ))}
+              {isShow2 && (
+                <div className="absolute left-[45%] text-[1.4rem] font-semibold">
+                  == No result in table ==
+                </div>
+              )}
             </tbody>
           </table>
         </div>
