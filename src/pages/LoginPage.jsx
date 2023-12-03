@@ -13,28 +13,33 @@ function LoginPage() {
   const [errors, setErrors] = useState({});
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email(),
+    email: Yup.string().email('Email tidak valid'),
     password: Yup.string().min(8, 'Kata sandi minimal 8 karakter'),
   });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await validationSchema.validate({ email, password });
+      await validationSchema.validate({ email, password }, { abortEarly: false });
       dispatch(loginAdmin({ email, password, rememberMe }));
+      setErrors({}); 
     } catch (error) {
-      setErrors({ ...errors, [error.path]: error.message });
+      const newErrors = {};
+      error.inner.forEach((err) => {
+        newErrors[err.path] = err.message;
+      });
+      setErrors(newErrors);
     }
   };
 
   return (
-    <div className="relative h-screen items-center justify-center font-poppins">
+    <div className="relative min-h-screen flex font-poppins">
       <img
         src={BG_LOGIN}
         alt=""
-        className=" w-3/4 h-screen object-cover hidden md:block"
+        className="absolute w-full h-full object-cover hidden md:block"
       />
-      <div className="absolute top-0 right-0 w-full md:w-[470px] min-h-screen justify-center items-center min-[320px]:p-2 md:p-8 md:rounded-l-[92px] bg-white md:shadow-2xl">
+      <div className="relative ms-auto w-full md:w-[470px] min-h-screen justify-center items-center min-[320px]:p-2 md:p-8 md:rounded-l-[92px] bg-white md:shadow-2xl">
         <div className="m-8">
           <img src={LOGO_ALTARESTO} alt="logo" className="w-[200px] h-[75px]" />
           <hr className="mt-4 border-t border-brown w-full" />
