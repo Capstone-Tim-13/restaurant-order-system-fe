@@ -9,6 +9,7 @@ import AnalisisPage from '../pages/AnalisisPage';
 import MenuConvert from '../pages/ConvertMenuPage';
 import TambahMenuPage from "../pages/TambahMenuPage";
 import renderRoute from './renderRoute';
+import ErrorPage from '../pages/ErrorPage'; 
 
 export default function root() {
   const routes = [
@@ -56,6 +57,11 @@ export default function root() {
           element: <TambahMenuPage />,
         },
       ],
+    },
+    {
+      path: '*', 
+      element: <ErrorPage />,
+      middleware: 'guest',
     },
   ];
 
