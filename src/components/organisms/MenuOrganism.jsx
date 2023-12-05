@@ -5,7 +5,8 @@ import MenuLinkMolecules from '../molecules/MenuLinkMolecules';
 import DEFAULT_PROFILE_ADMIN from '../../assets/images/potato.png';
 import TheadMolecules from '../molecules/TheadMolecules';
 import TbodyMolecules from '../molecules/TbodyMolecules';
-import axios from 'axios';
+import axios from '../../api/axios';
+import { useSelector } from 'react-redux';
 
 const initalLink = ['Semua Kategori', 'Apprtizer', 'Dessert', 'Ala Carte', 'Paket Hemat', 'Minum'];
 export default function MenuOrganism() {
@@ -14,16 +15,22 @@ export default function MenuOrganism() {
   const [sortedData, setSortedData] = useState(datas);
   const [search, setSearch] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const { token } = useSelector((state) => state.auth);
 
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
-      const api = 'https://654b557f5b38a59f28eee3f9.mockapi.io/products';
       try {
-        const response = await axios.get(api);
+        const response = await axios.get('/admin/menu', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const responseData = await response.data;
-        setDatas(responseData);
-        setSortedData(responseData);
+        const results = await responseData.results;
+        console.log(results);
+        setDatas(results);
+        setSortedData(results);
       } catch (error) {
         console.log(error);
       } finally {
@@ -32,7 +39,7 @@ export default function MenuOrganism() {
     };
 
     fetchData();
-  }, []);
+  }, [token]);
 
   // Fungsi Search Product
   const handleChange = (e) => {
@@ -49,6 +56,23 @@ export default function MenuOrganism() {
   // Fungsi Ketika Link Kategori Diklik
   const handleCLickLink = (link) => {
     setIsActive(link);
+  };
+
+  // Format Kategori
+  const categoriMap = {
+    1: 'Apprtizer',
+    2: 'Dessert',
+    3: 'Ala Carte',
+    4: 'Paket Hemat',
+    5: 'Minum',
+  };
+  const formatCategory = (category) => {
+    return categoriMap[category];
+  };
+
+  // semua Produk
+  const allProduct = () => {
+    setSortedData(datas);
   };
 
   // Fungsi Sortir by Name
@@ -68,13 +92,9 @@ export default function MenuOrganism() {
   };
 
   // Fungsi Sortir Product
-  const sortByProduct = (kategori) => {
-    const sortByKategori = datas.filter((data) => data.kategori === kategori);
+  const sortByProduct = (categoryid) => {
+    const sortByKategori = datas.filter((data) => formatCategory(data.categoryid) === categoryid);
     setSortedData(sortByKategori);
-  };
-
-  const allProduct = () => {
-    setSortedData(datas);
   };
 
   return (
@@ -85,7 +105,7 @@ export default function MenuOrganism() {
 
         <table className={`mt-12 w-full font-poppins text-xl ${isLoading && 'h-1000'}`}>
           <TheadMolecules />
-          <TbodyMolecules img={DEFAULT_PROFILE_ADMIN} datas={sortedData} loading={isLoading} />
+          <TbodyMolecules img={DEFAULT_PROFILE_ADMIN} formatCategory={formatCategory} datas={sortedData} loading={isLoading} />
         </table>
       </div>
     </div>
