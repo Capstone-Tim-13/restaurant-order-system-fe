@@ -4,6 +4,7 @@ export default function RingkasanPenjualan() {
   const datas = Array.from({ length: 30 }, (_, i) =>
     Math.floor(Math.random() * (500 - 1 + i) + 1)
   );
+  console.log(datas)
 
   return (
     <div className="bg-white shadow-lg rounded-3xl p-8 flex flex-col gap-5 w-max">

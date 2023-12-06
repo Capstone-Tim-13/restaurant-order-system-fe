@@ -18,11 +18,11 @@ export default function Dashboard() {
         <CountStatistic data={countStatisticDatas} />
         <SelectMonth />
       </div>
-      <div className="flex gap-3 flex-wrap">
+      <div className="flex flex-wrap gap-3">
         <RingkasanPenjualan />
         <PetaPelanggan />
-      </div>
-      <div className="flex gap-3 flex-wrap">
+      </div> 
+      <div className="flex flex-wrap gap-3">
         <PermintaanPesanan />
         <InfoTransaksi />
       </div>
