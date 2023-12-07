@@ -3,7 +3,7 @@ import { Switch, Loader } from '@mantine/core';
 import { DOTS_THREE } from '../../assets';
 
 export default function TbodyMolecules(props) {
-  const { formatCategory, datas, loading } = props;
+  const { formatCategory, datas, loading, handleDelete } = props;
 
   const [isChecked, setIsChecked] = useState({});
   const [opened, setOpened] = useState({});
@@ -48,7 +48,7 @@ export default function TbodyMolecules(props) {
               <img src={DOTS_THREE} opened={opened[data.id] || false} onClick={() => toggleRow(data.id)} className="ml-5 w-8 cursor-pointer rounded-full" />
               <div className={`flex flex-col w-28 bg-white rounded-sm shadow-md overflow-hidden absolute -right-32 -top-7 ${opened[data.id] ? 'block' : 'hidden'}`}>
                 <button className="hover:bg-orange hover:text-white px-5 py-2">Edit</button>
-                <button onClick={() => setOpened((prevOpened) => ({ ...prevOpened, [data.id]: false }))} className="hover:bg-orange hover:text-white px-5 py-2">
+                <button onClick={() => handleDelete(data.id)} className="hover:bg-orange hover:text-white px-5 py-2">
                   Hapus
                 </button>
               </div>

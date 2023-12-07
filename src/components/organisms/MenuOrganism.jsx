@@ -41,6 +41,23 @@ export default function MenuOrganism() {
     fetchData();
   }, [token]);
 
+  // fungsi Hapus Data
+  const handleDelete = (id) => {
+    try {
+      axios.delete(`/admin/menu/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const deleteData = sortedData.filter((data) => data.id !== id);
+      setSortedData(deleteData);
+      setDatas(deleteData);
+      console.log(deleteData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // Fungsi Search Product
   const handleChange = (e) => {
     const inputProduct = e.target.value;
@@ -105,7 +122,7 @@ export default function MenuOrganism() {
 
         <table className={`mt-12 w-full font-poppins text-xl ${isLoading && 'h-1000'}`}>
           <TheadMolecules />
-          <TbodyMolecules img={DEFAULT_PROFILE_ADMIN} formatCategory={formatCategory} datas={sortedData} loading={isLoading} />
+          <TbodyMolecules img={DEFAULT_PROFILE_ADMIN} formatCategory={formatCategory} datas={sortedData} loading={isLoading} handleDelete={handleDelete} />
         </table>
       </div>
     </div>
