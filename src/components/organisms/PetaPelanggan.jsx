@@ -1,41 +1,14 @@
 import CountPetaPelanggan from '../atoms/CountPetaPelanggan';
 import ChartPelanggan from '../molecules/ChartPelanggan';
 
-export default function PetaPelanggan() {
-  const pelangganDatas = [];
-  const pelangganBaruDatas = [];
-  const penjualanDatas = [];
-
-  for (let i = 0; i < 30; i++) {
-    const x = 2 * (i + 1);
-
-    if (x > 30) {
-      break; // Menghentikan perulangan ketika x sama dengan 30
-    }
-
-    pelangganDatas.push({
-      y: Math.floor(Math.random() * (500 - 0 + i) + 0),
-      x: x,
-    });
-
-    pelangganBaruDatas.push({
-      y: Math.floor(Math.random() * (500 - 0 + i) + 0),
-      x: x,
-    });
-
-    penjualanDatas.push({
-      y: Math.floor(Math.random() * (500 - 0 + i) + 0),
-      x: x,
-    });
-  }
-
+export default function PetaPelanggan({ datas }) {
   return (
     <div className="bg-white shadow-lg rounded-3xl p-8 flex flex-col gap-8">
       <h1 className="text-[24px] font-medium">Peta Pelanggan</h1>
       <ChartPelanggan
-        pelangganDatas={pelangganDatas}
-        pelangganBaruDatas={pelangganBaruDatas}
-        penjualanDatas={penjualanDatas}
+        pelangganDatas={datas?.pelanggan}
+        pelangganBaruDatas={datas?.pelangganBaru}
+        penjualanDatas={datas?.penjualan}
       />
       <div className="flex flex-col gap-4">
         <h1 className="text-[24px] font-medium">Pelanggan</h1>

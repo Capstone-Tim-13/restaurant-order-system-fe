@@ -1,6 +1,12 @@
 import { BsArrowDown, BsArrowUp } from 'react-icons/bs';
 import cn from '../../utils/cn';
 import Tooltip from '../atoms/Tooltip';
+import {
+  MENU_TERJUAL_ICON,
+  PELANGGAN_ICON,
+  PEMASUKAN_ICON,
+  TOTAL_PESANAN_ICON,
+} from '../../assets';
 
 export default function CountStatisticCard({
   icon,
@@ -10,9 +16,22 @@ export default function CountStatisticCard({
   persent,
   daily,
 }) {
+  const getIcon = (iconNumber) => {
+    switch (iconNumber) {
+      case 1:
+        return MENU_TERJUAL_ICON;
+      case 2:
+        return TOTAL_PESANAN_ICON;
+      case 3:
+        return PELANGGAN_ICON;
+      case 4:
+        return PEMASUKAN_ICON;
+    }
+  };
+
   return (
     <div className="bg-white rounded-3xl shadow-lg p-8 w-max flex flex-col gap-2 min-w-[250px]">
-      <img src={icon} alt="icon" width={26} />
+      <img src={getIcon(icon)} alt="icon" width={26} />
       <div
         className={cn('flex items-center gap-1 ', {
           '[&>svg]:text-green-600': isUp,
