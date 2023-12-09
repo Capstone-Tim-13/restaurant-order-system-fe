@@ -3,7 +3,7 @@ import { Switch, Loader } from '@mantine/core';
 import { DOTS_THREE } from '../../assets';
 
 export default function TbodyMolecules(props) {
-  const { formatCategory, datas, loading, handleDelete } = props;
+  const { formatCategory, datas, loading, handleDelete, handleStatus } = props;
 
   const [isChecked, setIsChecked] = useState({});
   const [opened, setOpened] = useState({});
@@ -15,7 +15,7 @@ export default function TbodyMolecules(props) {
     }));
   };
 
-  const handleChange = (e, id) => {
+  const handleChange = async (e, id) => {
     const target = e.currentTarget;
     const value = target.checked;
 
@@ -23,6 +23,16 @@ export default function TbodyMolecules(props) {
       ...prevState,
       [id]: value,
     }));
+
+    const status = datas.find((data) => data.id === id)?.status || '';
+    const newStatus = status === 'ready' ? 'Kosong' : 'Tersedia';
+    try {
+      await handleStatus(id, newStatus);
+    } catch (error) {
+      console.log(error);
+    }
+
+    handleStatus(id);
   };
 
   // Format Harga (Rupiah)
@@ -32,7 +42,7 @@ export default function TbodyMolecules(props) {
 
   return (
     <tbody className={`${loading && 'relative'}`}>
-      {datas.map((data) => (
+      {datas?.map((data) => (
         <tr key={data.id}>
           <td>
             <img src={data.image} alt="" className="w-[108px] h-[108px] rounded-3xl mb-2" />

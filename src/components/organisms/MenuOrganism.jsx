@@ -41,6 +41,24 @@ export default function MenuOrganism() {
     fetchData();
   }, [token]);
 
+  // Fungsi Status Produk
+  const handleStatus = async (id, newStatus) => {
+    try {
+      const response = await axios.put(
+        `/admin/status/${id}`,
+        { status: newStatus },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // fungsi Hapus Data
   const handleDelete = (id) => {
     try {
@@ -122,7 +140,7 @@ export default function MenuOrganism() {
 
         <table className={`mt-12 w-full font-poppins text-xl ${isLoading && 'h-1000'}`}>
           <TheadMolecules />
-          <TbodyMolecules img={DEFAULT_PROFILE_ADMIN} formatCategory={formatCategory} datas={sortedData} loading={isLoading} handleDelete={handleDelete} />
+          <TbodyMolecules img={DEFAULT_PROFILE_ADMIN} formatCategory={formatCategory} datas={sortedData} loading={isLoading} handleDelete={handleDelete} handleStatus={handleStatus} />
         </table>
       </div>
     </div>
