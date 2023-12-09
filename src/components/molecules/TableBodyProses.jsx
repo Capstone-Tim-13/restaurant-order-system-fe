@@ -10,6 +10,7 @@ export const TableBodyProses = ({
   price,
   satuan,
   total,
+  type,
   image,
 }) => {
   return (
@@ -36,15 +37,7 @@ export const TableBodyProses = ({
             className="w-[4.2rem] h-[4.2rem] rounded-full shadow-md"
             alt="gambar-menu"
           />
-          <div className="flex flex-col gap-5">
-            {menu.map((data) => {
-              return (
-                <span key={data.id} className="my-auto font-medium">
-                  {data.menu}
-                </span>
-              );
-            })}
-          </div>
+          <div className="flex flex-col gap-5 my-[1.2rem]">{menu}</div>
         </div>
       </td>
       <td className="px-3 py-6 text-start whitespace-no-wrap font-medium text-[19px] border-b border-gray-400">
@@ -86,7 +79,7 @@ export const TableBodyProses = ({
                 "&[data-hovered]": {},
               },
             })}
-            defaultValue="Disiapkan"
+            defaultValue={type === "selesai" ? "Diterima" : "Disiapkan"}
             data={["Disiapkan", "Dipacking", "Dikirim", "Diterima"]}
             className="pl-5 w-[170px] h-[55px] mt-0"
           />
