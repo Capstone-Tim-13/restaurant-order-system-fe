@@ -7,6 +7,7 @@ import {
   PEMASUKAN_ICON,
   TOTAL_PESANAN_ICON,
 } from '../../assets';
+import formatCurrency from '../../utils/formatCurrency';
 
 export default function CountStatisticCard({
   icon,
@@ -38,7 +39,7 @@ export default function CountStatisticCard({
           '[&>svg]:text-red-600': !isUp,
         })}>
         {isUp ? <BsArrowUp size={20} /> : <BsArrowDown size={20} />}
-        <p className="font-semibold text-[32px]">{count}</p>
+        <p className="font-semibold text-[32px]">{formatCurrency(count)}</p>
         <Tooltip title={daily.count}>
           <p
             className={cn('text-[20px]', {

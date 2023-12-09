@@ -1,5 +1,6 @@
 import { DEFAULT_FOTO_MAKANAN } from '../../assets';
 import cn from '../../utils/cn';
+import formatCurrency from '../../utils/formatCurrency';
 
 export default function ListPermintaanPesanan({
   imgUrl,
@@ -35,7 +36,7 @@ export default function ListPermintaanPesanan({
         </p>
       </div>
       <div className="flex items-center gap-3">
-        <p className="font-medium">Rp {price}</p>
+        <p className="font-medium">Rp {formatCurrency(price)}</p>
         <p className="text-gray-500">x {satuan}</p>
       </div>
       <div
@@ -44,8 +45,7 @@ export default function ListPermintaanPesanan({
           {
             'bg-green-200 text-green-700': type?.toLowerCase() === 'selesai',
             'bg-red-200 text-red-700': type?.toLowerCase() === 'batal',
-            'bg-orange-200 text-orange-700':
-              type?.toLowerCase() === 'pending',
+            'bg-orange-200 text-orange-700': type?.toLowerCase() === 'pending',
           }
         )}>
         {type}
