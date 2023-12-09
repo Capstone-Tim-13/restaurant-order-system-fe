@@ -61,7 +61,7 @@ export default function NotifikasiPesan() {
             </a>
           ))}
 
-          <Link to="/admin/pesanan" className="flex items-center justify-between px-4 py-3 hover:bg-gray-100 pb-1.5">
+          <Link to="/admin/pesanan" className="flex items-center justify-between px-4 py-3 hover:bg-gray-100 pb-1.5" onClick={toggleDropdown}>
             <div className="flex items-center justify-between">
               <div className="text-amber-900 text-sm mb-1.5 pt-1.5 pl-14">Lihat semua notifikasi</div>
               <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center">
