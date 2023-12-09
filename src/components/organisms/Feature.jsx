@@ -7,9 +7,9 @@ import { LINE } from "../../assets";
 export default function Feature() {
   return (
     <div>
-      <div className="w-full bg-[#030303] flex flex-col mb-20">
+      <div className="w-full max-w-[1800px] bg-[#030303] flex flex-col mb-20">
         <CardMenu />
-        <img src={LINE} alt="line" className="w-[1700px]" />
+        <img src={LINE} alt="line" className="max-w-[1800px]" />
         <div className="flex items-center">
           <div class="w-1/2 p-8  min-h-[auto] text-left ml-28" id="feature">
             <h1 class="text-[#fcfcfc] text-[56px] text-left mb-10 font-semibold ">
@@ -23,11 +23,11 @@ export default function Feature() {
               pengalaman kuliner yang tak terlupakan untukmu
             </p>
           </div>
-          <div className="w-1/3">
+          <div className="max-w-[1800px] ml-[290px] ">
             <img
               src={MAKANAN}
               alt="Makanan"
-              className="ml-[231px] object-cover w-[500px] h-[800px]"
+              className="object-cover w-[500px] h-[700px]"
             />
           </div>
         </div>

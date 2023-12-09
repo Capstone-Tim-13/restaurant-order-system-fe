@@ -15,7 +15,7 @@ export default function Services() {
   };
 
   return (
-    <div className="grid">
+    <div className="max-w-[1800px]">
       <div class="relative w-full bg-black">
         <img
           src={BG_SERVICES}

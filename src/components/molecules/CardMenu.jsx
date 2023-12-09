@@ -3,7 +3,7 @@ import { PESANAN } from "../../assets";
 import { CUSTOMER } from "../../assets";
 
 export const CardMenu = () => (
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 my-5 mx-20">
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 my-20 mx-20">
     <div className="relative bottom-16 justify-center items-center">
       <div className="bg-white text-white p-8 ml-14 w-[370px] h-[270px] rounded-[50px]">
         <img src={MENU} className="absolute bottom-40 left-10" />

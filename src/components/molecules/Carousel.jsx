@@ -29,7 +29,7 @@ const Carousel = ({
       >
         {slides}
       </div>
-      <div className="absolute mt-[380px] inset-[400px] right-10  justify-between p-28">
+      <div className="absolute mt-[700px] inset-[100px] left-[300px] justify-between p-28">
         <button
           onClick={prev}
           className="p-5 ml-[664px] rounded-full shadow bg-white/80 text-gray-800 hover:bg-white"

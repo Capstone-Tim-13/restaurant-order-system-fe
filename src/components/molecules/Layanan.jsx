@@ -14,13 +14,13 @@ export const Layanan = () => (
         <h1 class="text-[#1d1d1d] text-[56px] mt-10 text-center font-semibold ">
           <img
             src={ICON_KIRI}
-            className="absolute w-[100px] -top-5 left-[450px]"
+            className="absolute w-[100px] -top-5 left-[380px]"
           />
           Kenapa Harus Kita
         </h1>
         <img
           src={ICON_KANAN}
-          className="absolute w-[100px] -top-5 right-[450px]"
+          className="absolute w-[100px] -top-5 right-[380px]"
         />
       </div>
 

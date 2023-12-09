@@ -12,8 +12,8 @@ const slides = [
 
 export default function Menu() {
   return (
-    <div className="relative">
-      <div class="w-full h-[1403px] flex flex-col">
+    <div className="relative max-w-[1800px]">
+      <div class="w-full max-w-[1800px] h-[1403px] flex flex-col">
         <Carousel autoSlide={true}>
           {[...slides.map((s) => <img src={s} />)]}
         </Carousel>

@@ -5,9 +5,9 @@ import { Rating } from "@mantine/core";
 
 export default function TopMenu() {
   return (
-    <div>
+    <div className="max-w-[1800px]">
       <div className="h-[800px] w-full bg-[#0c0c0c]">
-        <div className="w-[400px] absolute mt-20 ml-20 h-[630px] [border-top:4px_dashed_#FCFCFC] [border-left:4px_dashed_#FCFCFC] [border-right:4px_dashed_#FCFCFC] [border-bottom:4px_dashed_#FCFCFC] rounded-tl-[48px] rounded-br-[48px] rounded-tr-[48px] rounded-bl-[48px]">
+        <div className="w-[400px] absolute mt-20 ml-24 h-[630px] [border-top:4px_dashed_#FCFCFC] [border-left:4px_dashed_#FCFCFC] [border-right:4px_dashed_#FCFCFC] [border-bottom:4px_dashed_#FCFCFC] rounded-tl-[48px] rounded-br-[48px] rounded-tr-[48px] rounded-bl-[48px]">
           <div className="bg-[#783525] text-white p-8 w-[350px] h-[580px] mt-5 ml-5 rounded-tl-[499px] rounded-br-[64px] rounded-tr-[499px] rounded-bl-[64px]">
             <img
               src={MENU_SATU}
@@ -50,7 +50,7 @@ export default function TopMenu() {
             </div>
           </div>
         </div>
-        <div className="w-[400px] absolute mt-20 ml-[1200px] h-[630px] [border-top:4px_dashed_#FCFCFC] [border-left:4px_dashed_#FCFCFC] [border-right:4px_dashed_#FCFCFC] [border-bottom:4px_dashed_#FCFCFC] rounded-tl-[48px] rounded-br-[48px] rounded-tr-[48px] rounded-bl-[48px]">
+        <div className="w-[400px] absolute mt-20 ml-[1200px] h-[630px] [border-left:4px_dashed_#FCFCFC] [border-right:4px_dashed_#FCFCFC] [border-bottom:4px_dashed_#FCFCFC] rounded-tl-[48px] rounded-br-[48px] rounded-tr-[48px] rounded-bl-[48px]">
           <div className="bg-[#783525] text-white p-8 w-[350px] h-[580px] mt-5 ml-5 rounded-tl-[499px] rounded-br-[64px] rounded-tr-[499px] rounded-bl-[64px]">
             <img
               src={MENU_TIGA}

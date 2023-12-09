@@ -32,15 +32,15 @@ export default function Footer() {
   };
 
   return (
-    <div>
+    <div className="max-w-[1800px]">
       <div className="flex h-[700px] w-full bg-[#0c0c0c]">
-        <div className="w-full h-[600px] mt-14 ml-8 max-w-[1623.46337890625px] [border-top:2px_solid_#ffffff] max-h-[614.72216796875px] [border-left:2px_solid_#ffffff] [border-right:2px_solid_#ffffff] [border-bottom:2px_solid_#ffffff] rounded-tl-[41px] rounded-br-[41px] rounded-tr-[41px] rounded-bl-[41px]">
+        <div className="w-full h-[600px] mt-14 ml-12 max-w-[1600px] [border-top:4px_dashed_#FCFCFC] [border-left:4px_dashed_#FCFCFC] [border-right:4px_dashed_#FCFCFC] [border-bottom:4px_dashed_#FCFCFC] max-h-[614.72216796875px]  rounded-tl-[41px] rounded-br-[41px] rounded-tr-[41px] rounded-bl-[41px]">
           <div className="grid grid-cols-4 gap-4">
             <img src={LOGO_ALTA} className="ml-12 mt-12 w-64" />
-            <h2 class="text-[#ffffff] text-[32px] flex ml-[740px] w-full mt-16  font-bold ">
+            <h2 class="text-[#ffffff] text-[32px] flex ml-[680px] w-full mt-16  font-bold ">
               Find us
             </h2>
-            <div className="flex ml-[330px] h-[50px] cursor-pointer mt-32 gap-5">
+            <div className="flex ml-[300px] h-[50px] cursor-pointer mt-32 gap-5">
               <img src={INSTAGRAM} onClick={handleInstagram} />
               <img src={TWITTER} onClick={handleTwitter} />
               <img src={LINKEDIN} onClick={handleLinkedin} />
