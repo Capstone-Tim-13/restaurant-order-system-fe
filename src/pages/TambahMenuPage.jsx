@@ -4,15 +4,21 @@ import { RekomendasiTambahMenu } from "../components/organisms/RekomendasiTambah
 import { MENU_ADD_ICON } from "../assets";
 import { MenuArrow } from "../components/molecules/MenuArrow";
 import cn from "../utils/cn";
+import axios from "../api/axios";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const TambahMenuPage = () => {
   const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedValue, setSelectedValue] = useState("");
   const [nameMenu, setNameMenu] = useState("");
   const [descMenu, setDescMenu] = useState("");
   const [priceMenu, setPriceMenu] = useState(0);
   const [error1, setError1] = useState("");
   const [error2, setError2] = useState("");
   const [error3, setError3] = useState("");
+  const { token } = useSelector((state) => state.auth);
+  const nav = useNavigate();
 
   const kategoriMenu = [
     {
@@ -42,19 +48,58 @@ const TambahMenuPage = () => {
     },
   ];
 
+  //handlechange form
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setSelectedFile(file);
+    setSelectedFile(e.target.files[0]);
   };
-
+  const handleSelectChange = (value) => {
+    setSelectedValue(value);
+  };
   const handleName = (e) => setNameMenu(e.target.value);
   const handleDesc = (e) => setDescMenu(e.target.value);
   const handlePrice = (e) => setPriceMenu(e.target.value);
 
-  const handleSave = () => {
+  //handle simpan
+  const handleSave = async (e) => {
+    e.preventDefault();
+
     nameMenu == "" ? setError1("Input tidak boleh kosong") : setError1("");
     descMenu == "" ? setError2("Input tidak boleh kosong") : setError2("");
     priceMenu == 0 ? setError3("Input tidak boleh kosong") : setError3("");
+
+    const formData = {
+      image: selectedFile,
+      name: nameMenu,
+      description: descMenu,
+      category: selectedValue,
+      price: priceMenu,
+    };
+
+    console.log(formData);
+
+    if (
+      selectedFile !== null &&
+      nameMenu !== "" &&
+      descMenu !== "" &&
+      selectedValue !== "" &&
+      priceMenu !== 0
+    ) {
+      try {
+        // const response = await axios.post(
+        //   "https://65742469f941bda3f2af66f9.mockapi.io/addmenu",
+        //   formData
+        // );
+        const response = await axios.post("/admin/menu", formData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log("Respons server:", response.data);
+        nav("/admin/menu");
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
   return (
@@ -190,8 +235,9 @@ const TambahMenuPage = () => {
                   variant="unstyled"
                   size="xl"
                   id="kategori"
-                  // radius="xl"
                   data={kategoriMenu}
+                  value={selectedValue}
+                  onChange={handleSelectChange}
                   placeholder="Kategori"
                   className="pl-2.5 w-[11.5rem] h-[55px] mt-0"
                   styles={(theme) => ({
@@ -226,7 +272,7 @@ const TambahMenuPage = () => {
       </div>
 
       {/* Rekomendasi Menu */}
-      <RekomendasiTambahMenu onClick={handleSave} />
+      <RekomendasiTambahMenu onClick={(e) => handleSave(e)} />
     </>
   );
 };
