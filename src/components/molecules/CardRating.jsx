@@ -57,23 +57,23 @@ export const CardRating = () => {
       <Slider {...settings}>
         {datas.map((data) => (
           <div className="h-[500px] ">
-            <div className="bg-[#fcfcfc] absolute bottom-8 p-8 w-[350px] h-[450px] rounded-[20px]">
+            <div className="bg-[#fcfcfc] absolute bottom-8 p-8 w-[350px] h-[420px] rounded-[20px]">
               <img
                 src={data.avatar}
-                alt=""
+                alt="avatar"
                 className="rounded-full ml-[85px]"
               />
-              <h2 class="text-[#000000] text-[30px] mt-3 text-center font-medium">
+              <h2 class="text-[#000000] text-[25px] mt-3 text-center font-medium">
                 {data.nama}
               </h2>
               <Rating
                 defaultValue={data.rating}
-                size="xl"
+                size="lg"
                 color="#FFBC80"
-                className="ml-14"
+                className="ml-16"
                 readOnly
               />
-              <p class="text-[#1d1d1d] text-[18px] mt-3 text-center font-normal">
+              <p class="text-[#1d1d1d] text-[17px] mt-3 text-center font-normal">
                 {data.komentar}
               </p>
             </div>

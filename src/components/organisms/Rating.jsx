@@ -3,7 +3,7 @@ import { CardRating } from "../molecules/CardRating";
 
 export default function Rating() {
   return (
-    <div className="max-w-[1800px]">
+    <div className="max-w-[1700px]">
       <div className="w-full bg-black relative">
         <img
           src={BG_RATING}

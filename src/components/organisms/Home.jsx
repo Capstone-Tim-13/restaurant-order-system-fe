@@ -4,7 +4,7 @@ import { BACKGROUND_VIDEO } from "../../assets";
 
 export default function Home() {
   return (
-    <div className="max-w-[1800px]">
+    <div className="max-w-[1700px]">
       <div className="relative" id="home">
         <video
           className="w-full h-full object-cover"

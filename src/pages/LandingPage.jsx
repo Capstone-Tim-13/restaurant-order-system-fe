@@ -8,8 +8,8 @@ import Footer from "../components/organisms/Footer";
 
 export default function LandingPage() {
   return (
-    <>
-      <div className="transition duration-300 ease-in-out">
+    <div className="grid place-items-center">
+      <div className="transition duration-300 ease-in-out w-max shadow-xl shadow-gray-600">
         <Navbar />
         <Home />
         <Feature />
@@ -18,8 +18,6 @@ export default function LandingPage() {
         <Services />
         <Footer />
       </div>
-    </>
+    </div>
   );
 }
-
-
