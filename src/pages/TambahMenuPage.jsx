@@ -27,29 +27,24 @@ const TambahMenuPage = () => {
 
   const kategoriMenu = [
     {
-      id: 1,
       label: 'Appetizer',
-      value: 'Appetizer',
+      value: 1,
     },
     {
-      id: 2,
       label: 'Dessert',
-      value: 'Dessert',
+      value: 2,
     },
     {
-      id: 3,
       label: 'Ala Carte',
-      value: 'Ala Carte',
+      value: 3,
     },
     {
-      id: 4,
       label: 'Paket Hemat',
-      value: 'Paket Hemat',
+      value: 4,
     },
     {
-      id: 5,
       label: 'Minum',
-      value: 'Minum',
+      value: 5,
     },
   ];
 
@@ -57,9 +52,7 @@ const TambahMenuPage = () => {
   const handleFileChange = (e) => {
     setSelectedFile(e.target.files[0]);
   };
-  const handleSelectChange = (id) => {
-    setSelectedValue(id);
-  };
+
   const handleName = (e) => setNameMenu(e.target.value);
   const handleDesc = (e) => setDescMenu(e.target.value);
   const handlePrice = (e) => setPriceMenu(e.target.value);
@@ -71,14 +64,6 @@ const TambahMenuPage = () => {
     nameMenu == '' ? setError1('Input tidak boleh kosong') : setError1('');
     descMenu == '' ? setError2('Input tidak boleh kosong') : setError2('');
     priceMenu == 0 ? setError3('Input tidak boleh kosong') : setError3('');
-
-    const formData = {
-      image: selectedFile,
-      name: nameMenu,
-      description: descMenu,
-      category: selectedValue,
-      price: priceMenu,
-    };
     if (
       selectedFile !== null &&
       nameMenu !== '' &&
@@ -87,10 +72,23 @@ const TambahMenuPage = () => {
       priceMenu !== 0
     ) {
       notifyLoading('Proses menambahkan...', 'tambah-menu');
+      console.log({
+        image: selectedFile,
+        name: nameMenu,
+        description: descMenu,
+        categoryid: selectedValue,
+        price: priceMenu,
+      });
       try {
         await axios.post(
           `${import.meta.env.VITE_APP_SERVER_URL}/admin/create/menu`,
-          formData,
+          {
+            image: selectedFile,
+            name: nameMenu,
+            description: descMenu,
+            categoryid: selectedValue,
+            price: priceMenu,
+          },
           {
             headers: {
               'Content-Type': 'multipart/form-data',
@@ -98,10 +96,11 @@ const TambahMenuPage = () => {
             },
           }
         );
-        console.log(formData);
+
         notifySuccess('Menu Berhasil ditambahkan.', 'tambah-menu');
         nav('/admin/menu');
       } catch (error) {
+        console.log(error);
         notifyError('Menu Gagal ditambahkan.', 'tambah-menu');
       }
     }
@@ -240,7 +239,7 @@ const TambahMenuPage = () => {
                   id="kategori"
                   data={kategoriMenu}
                   value={selectedValue}
-                  onChange={handleSelectChange}
+                  onChange={(value) => setSelectedValue(value)}
                   placeholder="Kategori"
                   className="pl-2.5 w-[11.5rem] h-[55px] mt-0"
                   styles={(theme) => ({
