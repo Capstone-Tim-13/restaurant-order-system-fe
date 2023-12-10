@@ -11,6 +11,7 @@ import MenuConvert from '../pages/ConvertMenuPage';
 import TambahMenuPage from '../pages/TambahMenuPage';
 import renderRoute from './renderRoute';
 import ErrorPage from '../pages/ErrorPage';
+import EditMenuPage from '../pages/EditMenuPage';
 
 export default function root() {
   const routes = [
@@ -55,6 +56,10 @@ export default function root() {
         {
           path: '/menutambah',
           element: <TambahMenuPage />,
+        },
+        {
+          path: '/editmenu/:id',
+          element: <EditMenuPage />,
         },
       ],
     },
