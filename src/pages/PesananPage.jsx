@@ -1,80 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TableHeadPesanan from "../components/molecules/TableHeadPesanan";
 import { TableBodyMasuk } from "../components/molecules/TableBodyMasuk";
 import { TableBodyProses } from "../components/molecules/TableBodyProses";
-import { Select } from "@mantine/core";
+import { Select, Loader } from "@mantine/core";
 import { KENTANG_GORENG } from "../assets";
 import { IoSearch } from "react-icons/io5";
 import cn from "../utils/cn";
+import axios from "axios";
 
 const PesananPage = () => {
-  const data = [
-    {
-      id: "#355216",
-      date: "10 November 2023",
-      name: "Rita Martini",
-      address: "Jl. Puputan 56, Jakarta",
-      menu: [
-        {
-          id: "1",
-          menu: "Kentang Goreng",
-        },
-      ],
-      price: "15000",
-      satuan: 1,
-      total: "25000",
-    },
-    {
-      id: "#355217",
-      date: "17 November 2023",
-      name: "John Oey",
-      address: "Jl. Kebon sari 56, Jakarta",
-      menu: [
-        {
-          id: "1",
-          menu: "Garlic Bread",
-        },
-      ],
-      price: "10000",
-      satuan: 1,
-      total: "20000",
-    },
-    {
-      id: "#355218",
-      date: "1 November 2023",
-      name: "Lala Sepuh",
-      address: "Jl. Dimana yh 23, Jakarta",
-      menu: [
-        {
-          id: "1",
-          menu: "Napoli Penne",
-        },
-      ],
-      price: "10000",
-      satuan: 2,
-      total: "25000",
-    },
-    {
-      id: "#355219",
-      date: "14 November 2023",
-      name: "Mang Eak",
-      address: "Jl. Puputan 56, Jakarta",
-      menu: [
-        {
-          id: "1",
-          menu: "Lamian",
-        },
-      ],
-      price: "10000",
-      satuan: 2,
-      total: "25000",
-    },
-  ];
-
+  const [booking, setBooking] = useState([]);
   const [search, setSearch] = useState("");
   const [isShow, setIsShow] = useState(false);
   const [isShow2, setIsShow2] = useState(false);
-  const [filter, setFilter] = useState(data);
+  const [isLoading, setIsLoading] = useState(false);
+  const [filter, setFilter] = useState(booking);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      const api =
+        "https://6569e491de53105b0dd7d443.mockapi.io/api/dummy/pesanan";
+      try {
+        const response = await axios.get(api);
+        const responseData = await response.data;
+        setBooking(responseData);
+        setFilter(responseData);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleSearch = (event) => {
     const valueInput = event.target.value;
@@ -83,27 +43,24 @@ const PesananPage = () => {
     const filteredData = filter.filter((item) => {
       return (
         item.name.toLowerCase().includes(search.toLowerCase()) ||
-        item.id.toLowerCase().includes(search.toLowerCase()) ||
-        item.date.toLowerCase().includes(search.toLowerCase()) ||
+        item.idOrder.toLowerCase().includes(search.toLowerCase()) ||
+        String(item.date).toLowerCase().includes(search.toLowerCase()) ||
         item.address.toLowerCase().includes(search.toLowerCase()) ||
-        item.menu.some((menuItem) =>
-          menuItem.menu.toLowerCase().includes(search.toLowerCase())
-        ) ||
-        item.price.toLowerCase().includes(search.toLowerCase()) ||
-        item.total.toLowerCase().includes(search.toLowerCase())
+        item.menu.toLowerCase().includes(search.toLowerCase()) ||
+        String(item.price).toLowerCase().includes(search.toLowerCase()) ||
+        String(item.total).toLowerCase().includes(search.toLowerCase())
       );
     });
 
-    console.log(filter);
-
-    valueInput !== "" ? setFilter(filteredData) : setFilter(data);
+    valueInput !== "" ? setFilter(filteredData) : setFilter(booking);
     valueInput === "" ? setIsShow2(isShow2) : setIsShow2(!isShow2);
     filter.length === 0 ? setIsShow2(!isShow2) : setIsShow2(isShow2);
   };
 
-  const failedClick = () => {
-    console.log("clear");
-  };
+  const pendingData = filter.filter((item) => item.type === "pending");
+  const cancelData = filter.filter((item) => item.type === "batal");
+  const prosesData = filter.filter((item) => item.type === "proses");
+  const doneData = filter.filter((item) => item.type === "selesai");
 
   return (
     <>
@@ -171,25 +128,49 @@ const PesananPage = () => {
             <TableHeadPesanan id="head-pesanan" newhead={""} />
           </thead>
           <tbody>
-            {filter.map((item) => (
-              <TableBodyMasuk
-                key={item.id}
-                id={item.id}
-                date={item.date}
-                name={item.name}
-                address={item.address}
-                menu={item.menu}
-                price={item.price}
-                satuan={item.satuan}
-                total={item.total}
-                onClick={failedClick}
-                image={KENTANG_GORENG}
-              />
-            ))}
-            {isShow2 && (
+            {pendingData?.map((item) => {
+              return (
+                <TableBodyMasuk
+                  key={item.id}
+                  id={item.idOrder}
+                  date={item.date}
+                  name={item.name}
+                  address={item.address}
+                  menu={item.menu}
+                  price={item.price}
+                  satuan={item.satuan}
+                  total={item.total}
+                  type={item.type}
+                  image={KENTANG_GORENG}
+                />
+              );
+            })}
+            {cancelData?.map((item) => {
+              return (
+                <TableBodyMasuk
+                  key={item.id}
+                  id={item.idOrder}
+                  date={item.date}
+                  name={item.name}
+                  address={item.address}
+                  menu={item.menu}
+                  price={item.price}
+                  satuan={item.satuan}
+                  total={item.total}
+                  type={item.type}
+                  image={KENTANG_GORENG}
+                />
+              );
+            })}
+            {isShow2 ? (
               <div className="absolute left-[45%] text-[1.4rem] font-semibold">
                 == No result in table ==
               </div>
+            ) : (
+              <div></div>
+            )}
+            {isLoading && (
+              <Loader color="orange" className="absolute left-[50%]" />
             )}
           </tbody>
         </table>
@@ -214,24 +195,54 @@ const PesananPage = () => {
               <TableHeadPesanan id="head-pesanan" newhead={"Status"} />
             </thead>
             <tbody>
-              {filter.map((item) => (
-                <TableBodyProses
-                  key={item.id}
-                  id={item.id}
-                  date={item.date}
-                  name={item.name}
-                  address={item.address}
-                  menu={item.menu}
-                  price={item.price}
-                  satuan={item.satuan}
-                  total={item.total}
-                  image={KENTANG_GORENG}
-                />
-              ))}
-              {isShow2 && (
+              {prosesData?.map((item) => {
+                return (
+                  <TableBodyProses
+                    key={item.id}
+                    id={item.idOrder}
+                    date={item.date}
+                    name={item.name}
+                    address={item.address}
+                    menu={item.menu}
+                    price={item.price}
+                    satuan={item.satuan}
+                    total={item.total}
+                    type={item.type}
+                    image={KENTANG_GORENG}
+                  />
+                );
+              })}
+              {doneData?.map((item) => {
+                return (
+                  <TableBodyProses
+                    key={item.id}
+                    id={item.idOrder}
+                    date={item.date}
+                    name={item.name}
+                    address={item.address}
+                    menu={item.menu}
+                    price={item.price}
+                    satuan={item.satuan}
+                    total={item.total}
+                    type={item.type}
+                    image={KENTANG_GORENG}
+                  />
+                );
+              })}
+              {/* {isShow2 && (
                 <div className="absolute left-[45%] text-[1.4rem] font-semibold">
                   == No result in table ==
                 </div>
+              )} */}
+              {isShow2 ? (
+                <div className="absolute left-[45%] text-[1.4rem] font-semibold">
+                  == No result in table ==
+                </div>
+              ) : (
+                <div></div>
+              )}
+              {isLoading && (
+                <Loader color="orange" className="absolute left-[50%]" />
               )}
             </tbody>
           </table>
