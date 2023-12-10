@@ -7,6 +7,12 @@ import cn from "../utils/cn";
 import axios from "../api/axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import {
+  notifyError,
+  notifyLoading,
+  notifySuccess,
+} from '../components/atoms/Toast';
+import urlToBlob from '../utils/urlToBlob';
 
 export default function EditMenuPage() {
   const navigate = useNavigate();
@@ -14,31 +20,33 @@ export default function EditMenuPage() {
   const { id } = useParams();
   const [data, setData] = useState({
     image: null,
-    name: "",
-    description: "",
-    categoryid: "", 
-    price: "0",
+    name: '',
+    description: '',
+    categoryid: '',
+    price: '0',
   });
   const categoryMenu = [
-    { id: 1, label: "Appetizer", value: "Appetizer" },
-    { id: 2, label: "Dessert", value: "Dessert" },
-    { id: 3, label: "Ala Carte", value: "Ala Carte" },
-    { id: 4, label: "Paket Hemat", value: "Paket Hemat" },
-    { id: 5, label: "Minum", value: "Minum" },
+    { id: 1, label: 'Appetizer', value: 'Appetizer' },
+    { id: 2, label: 'Dessert', value: 'Dessert' },
+    { id: 3, label: 'Ala Carte', value: 'Ala Carte' },
+    { id: 4, label: 'Paket Hemat', value: 'Paket Hemat' },
+    { id: 5, label: 'Minum', value: 'Minum' },
   ];
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`/admin/menu/${id}`, {
+        const { data } = await axios.get(`/admin/menu/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-        const responseData = response.data;
-        const results = responseData.results;
-        console.log(results);
-        setData(results);
+        const results = data.results;
+        const file = await urlToBlob(results.image);
+        setData({
+          ...results,
+          image: file,
+        });
       } catch (error) {
         console.log(error);
       }
@@ -49,15 +57,17 @@ export default function EditMenuPage() {
 
   const getCategoryValue = (categoryId) => {
     const category = categoryMenu.find((item) => item.id === categoryId);
-    return category ? category.value : "";
+    return category ? category.value : '';
   };
 
   const handleChange = (e) => {
-    if (e.target.name === "categoryid") {
-      const category = categoryMenu.find((item) => item.id === parseInt(e.target.value));
+    if (e.target.name === 'categoryid') {
+      const category = categoryMenu.find(
+        (item) => item.id === parseInt(e.target.value)
+      );
       setData({
         ...data,
-        [e.target.name]: category ? category.id : "",
+        [e.target.name]: category ? category.id : '',
       });
     } else {
       setData({
@@ -78,29 +88,30 @@ export default function EditMenuPage() {
     const category = categoryMenu.find((item) => item.value === value);
     setData({
       ...data,
-      categoryid: category ? category.id : "",
+      categoryid: category ? category.id : '',
     });
   };
 
   const handleSubmit = async () => {
+    notifyLoading('Proses update menu...', 'edit-menu');
     try {
       const formData = new FormData();
-      formData.append("image", data.image || "");
-      formData.append("name", data.name);
-      formData.append("description", data.description);
-      formData.append("categoryid", data.categoryid);
-      formData.append("price", data.price);
+      formData.append('image', data.image || '');
+      formData.append('name', data.name);
+      formData.append('description', data.description);
+      formData.append('categoryid', data.categoryid);
+      formData.append('price', data.price);
 
-      const response = await axios.put(`/admin/update/menu/${id}`, formData, {
+      await axios.put(`/admin/update/menu/${id}`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
+          'Content-Type': 'multipart/form-data',
         },
       });
-      console.log(response.data);
-      navigate("/admin/menu");
-      alert("Data berhasil diupdate");
+      notifySuccess('Menu Berhasil diupdate.', 'edit-menu');
+      navigate('/admin/menu');
     } catch (error) {
+      notifyError('Menu Gagal diupdate.', 'edit-menu');
       console.log(error.response.data);
     }
   };
@@ -109,9 +120,7 @@ export default function EditMenuPage() {
     <>
       <MenuArrow />
       <div className="bg-white rounded-xl shadow my-10 pb-20 ">
-        <h1 className="font-medium text-[24px] ml-[3.8rem] pt-8">
-          Edit Menu
-        </h1>
+        <h1 className="font-medium text-[24px] ml-[3.8rem] pt-8">Edit Menu</h1>
         <div className="flex ml-10 gap-20">
           <div>
             <div className="ml-6 my-6">
@@ -120,10 +129,9 @@ export default function EditMenuPage() {
               </label>
               <div
                 className={cn(
-                  "border-dashed border-4 border-brown rounded-[38px] bg-gray-200 p-10 mb-4 w-full h-[250px] flex justify-center items-center",
-                  { "max-w-[350px]": data.image }
-                )}
-              >
+                  'border-dashed border-4 border-brown rounded-[38px] bg-gray-200 p-10 mb-4 w-full h-[250px] flex justify-center items-center',
+                  { 'max-w-[350px]': data.image }
+                )}>
                 <input
                   type="file"
                   accept=".jpg"
@@ -133,8 +141,7 @@ export default function EditMenuPage() {
                 />
                 <label
                   htmlFor="file-input"
-                  className="cursor-pointer flex items-center"
-                >
+                  className="cursor-pointer flex items-center">
                   <img
                     src={MENU_ADD_ICON}
                     alt="add-icon"
@@ -195,7 +202,9 @@ export default function EditMenuPage() {
                   placeholder="Deskripsi Menu"
                   required
                 />
-                <span className="text-right">{data.description.length}/150</span>
+                <span className="text-right">
+                  {data.description.length}/150
+                </span>
               </div>
               <div className="flex flex-col pt-[4rem]">
                 <label htmlFor="" className="text-[20px]">
@@ -229,23 +238,23 @@ export default function EditMenuPage() {
                   className="pl-2.5 w-[11.5rem] h-[55px] mt-0"
                   styles={(theme) => ({
                     item: {
-                      "&[data-selected]": {
-                        "&, &:hover": {
+                      '&[data-selected]': {
+                        '&, &:hover': {
                           backgroundColor:
-                            theme.colorScheme === "dark"
+                            theme.colorScheme === 'dark'
                               ? theme.colors.orange[9]
                               : theme.colors.orange[1],
                           color:
-                            theme.colorScheme === "dark"
+                            theme.colorScheme === 'dark'
                               ? theme.white
                               : theme.colors.dark[9],
                           border:
-                            theme.colorScheme === "dark"
-                              ? "1px solid #E25E3E"
-                              : "1px solid #E25E3E",
+                            theme.colorScheme === 'dark'
+                              ? '1px solid #E25E3E'
+                              : '1px solid #E25E3E',
                         },
                       },
-                      "&[data-hovered]": {},
+                      '&[data-hovered]': {},
                     },
                   })}
                   onChange={(value) => handleCategoryChange(value)}
