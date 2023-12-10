@@ -42,22 +42,22 @@ export default function MenuOrganism() {
   }, [token]);
 
   // Fungsi Status Produk
-  const handleStatus = async (id, newStatus) => {
-    try {
-      const response = await axios.put(
-        `/admin/status/${id}`,
-        { status: newStatus },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      console.log(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handleStatus = async (id, newStatus) => {
+  //   try {
+  //     const response = await axios.put(
+  //       `/admin/status/${id}`,
+  //       { status: newStatus },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+  //     console.log(response.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   // fungsi Hapus Data
   const handleDelete = (id) => {
