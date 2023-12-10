@@ -21,7 +21,7 @@ export default function ListMenuTren() {
   useEffect(() => {
     // Menggunakan Axios untuk mengambil data dari API
     axios
-      .get("https://654b5d435b38a59f28eef00e.mockapi.io/makanan")
+      .get("https://652b947f4791d884f1fde7f8.mockapi.io/MakananTren")
       .then((response) => {
         const sortedData = response.data.sort((a, b) => b.order - a.order);
         setData(sortedData);
@@ -53,11 +53,14 @@ export default function ListMenuTren() {
             #{index + 1}.
           </span>
           <div className="flex flex-col w-full px-5 pb-3 text-sm text-left font-poppins font-semibold">
-            Kentang Goreng
-            <div className="flex justify-between">
-              <span className="text-xs font-poppins px-1 pt-2 font-normal text-gray-500">
-                Order {item.order}
-              </span>
+            {item.nama}
+            <div className="flex justify-between ">
+              <div className="text-xs font-poppins px-0 pt-2 font-normal text-gray-500">
+                Order 
+                <span className="text-xs font-poppins px-1 pt-2 font-semibold text-gray-500">
+                  {item.order}x
+                  </span>
+              </div>
               <span className="text-sm font-poppins font-bold py-1">
               Rp. {Number(item.harga).toLocaleString("id-ID")}
               </span>

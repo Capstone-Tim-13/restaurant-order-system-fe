@@ -10,28 +10,25 @@ const formatRupiah = (value) => {
 };
 
 
-export default function BarChart({ selectedOption }) {
-  const chartRef = useRef(selectedOption);
+export default function BarChart({ selectedOption, laporan }) {
+  const chartRef = useRef(null);
   const chartInstance = useRef(null); // Simpan referensi ke instance diagram.
 
   useEffect(() => {
-    console.log('Selected Option:', selectedOption);
-
-    const DATA_COUNT = 12;
-    const labels = [
-      'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'
-    ]
-
     const data = {
-      labels: labels,
+      labels:
+        selectedOption === 'bulan' ? laporan?.bulan.label : laporan?.tahun.label,
       datasets: [
         {
           label: 'Pemasukan',
-          data: Array.from({ length: DATA_COUNT }, () => Math.random() * 200),
+          data:
+            selectedOption === 'bulan'
+              ? laporan?.bulan.data
+              : laporan?.tahun.data,
           backgroundColor: '#783525',
           borderWidth: 2,
           borderRadius: Number.MAX_VALUE,
-          borderSkipped: "bottom",
+          borderSkipped: 'bottom',
         },
       ],
     };

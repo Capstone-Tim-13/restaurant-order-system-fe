@@ -16,7 +16,7 @@ export default function ListTopPel() {
   useEffect(() => {
     // Menggunakan Axios untuk mengambil data dari API
     axios
-      .get("https://654b5d435b38a59f28eef00e.mockapi.io/pelanggan")
+      .get("https://654b5d435b38a59f28eef00e.mockapi.io/Pelanggan")
       .then((response) => {
         const sortedData = response.data.sort((a, b) => b.order - a.order);
         setData(sortedData);
