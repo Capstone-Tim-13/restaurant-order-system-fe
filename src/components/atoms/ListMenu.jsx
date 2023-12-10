@@ -7,8 +7,10 @@ import { notifyError, notifyLoading, notifySuccess } from './Toast';
 import { DEFAULT_FOTO_MAKANAN, DOTS_THREE } from '../../assets';
 import { useState } from 'react';
 import { useClickOutside } from '@mantine/hooks';
+import { useNavigate } from 'react-router-dom';
 
 export default function ListMenu({ data, fetchData }) {
+  const navigate = useNavigate();
   const { token } = useSelector((state) => state.auth);
   const [isOpen, setIsOpen] = useState(false);
   const [isChecked, setIsChecked] = useState(data.status);
@@ -81,7 +83,9 @@ export default function ListMenu({ data, fetchData }) {
               isOpen ? 'block' : 'hidden'
             }`}
             ref={ref}>
-            <button className="hover:bg-orange hover:text-white px-5 py-2">
+            <button
+              className="hover:bg-orange hover:text-white px-5 py-2"
+              onClick={() => navigate(`/admin/editmenu/${data.id}`)}>
               Edit
             </button>
             <button
