@@ -32,15 +32,15 @@ export default function Footer() {
   };
 
   return (
-    <div>
-      <div className="flex h-[700px] w-full bg-[#0c0c0c]">
-        <div className="w-full h-[600px] mt-14 ml-8 max-w-[1623.46337890625px] [border-top:2px_solid_#ffffff] max-h-[614.72216796875px] [border-left:2px_solid_#ffffff] [border-right:2px_solid_#ffffff] [border-bottom:2px_solid_#ffffff] rounded-tl-[41px] rounded-br-[41px] rounded-tr-[41px] rounded-bl-[41px]">
+    <div className="max-w-[1700px]">
+      <div className="flex h-[550px] w-full bg-[#0c0c0c]">
+        <div className="w-full h-[470px] mt-10 ml-14 max-w-[1600px] [border-top:4px_dashed_#FCFCFC] [border-left:4px_dashed_#FCFCFC] [border-right:4px_dashed_#FCFCFC] [border-bottom:4px_dashed_#FCFCFC] max-h-[614.72216796875px]  rounded-tl-[41px] rounded-br-[41px] rounded-tr-[41px] rounded-bl-[41px]">
           <div className="grid grid-cols-4 gap-4">
-            <img src={LOGO_ALTA} className="ml-12 mt-12 w-64" />
-            <h2 class="text-[#ffffff] text-[32px] flex ml-[740px] w-full mt-16  font-bold ">
+            <img src={LOGO_ALTA} className="ml-12 mt-5 w-52" />
+            <h2 class="text-[#ffffff] text-[28px] flex ml-[750px] w-full mt-5  font-bold ">
               Find us
             </h2>
-            <div className="flex ml-[330px] h-[50px] cursor-pointer mt-32 gap-5">
+            <div className="flex ml-[340px] h-[40px] cursor-pointer mt-20 gap-5">
               <img src={INSTAGRAM} onClick={handleInstagram} />
               <img src={TWITTER} onClick={handleTwitter} />
               <img src={LINKEDIN} onClick={handleLinkedin} />
@@ -50,27 +50,27 @@ export default function Footer() {
           </div>
           <div class="grid grid-cols-4 gap-4 mt-5">
             <div class="w-full ml-12 ">
-              <p class="text-[#ffffff] text-[32px] font-medium">About Us</p>
-              <p class="text-[#ffffff] text-[30px]">Cookies & Setting</p>
+              <p class="text-[#ffffff] text-[28px] font-medium">About Us</p>
+              <p class="text-[#ffffff] text-[25px]">Cookies & Setting</p>
             </div>
             <div class="w-full">
-              <p class="text-[#ffffff] text-[32px] font-medium">FAQs</p>
-              <p class="text-[#ffffff] text-[30px]">Term & Conditions</p>
+              <p class="text-[#ffffff] text-[28px] font-medium">FAQs</p>
+              <p class="text-[#ffffff] text-[25px]">Term & Conditions</p>
             </div>
             <div class="w-full">
-              <p class="text-[#ffffff] text-[32px] font-medium">
+              <p class="text-[#ffffff] text-[28px] font-medium">
                 Privacy & Cookies
               </p>
-              <p class="text-[#ffffff] text-[30px]">Help & Report</p>
+              <p class="text-[#ffffff] text-[25px]">Help & Report</p>
             </div>
           </div>
-          <div class="w-full max-w-[1500px] ml-12 mt-10 ">
-            <p class="text-[#ffffff] text-[32px]">©Alta-Resto 2023</p>
+          <div class="w-full max-w-[1400px] ml-12 mt-10 ">
+            <p class="text-[#ffffff] text-[28px]">©Alta-Resto 2023</p>
             <p class="mt-0 text-left mb-0">
               <br />
               <br />
             </p>
-            <p class="text-[#ffffff] text-[30px]">
+            <p class="text-[#ffffff] text-[28px]">
               Alta-Resto adalah restauran penyedia layanan pemesanan antar
               makanan secara online. Bergabung bersama kami dalam memberikan
               pelayanan yang terbaik

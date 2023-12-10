@@ -52,7 +52,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <div className="fixed w-full z-50">
+    <div className="fixed w-full max-w-[1700px] z-50">
       <div
         className={`${
           isScroll ? "bg-[#783525] h-[90px] lg:-top-[60px]" : " h-[80px]"
@@ -84,7 +84,7 @@ export default function Navbar() {
         </ul>
         <div className="flex text-2xl text-white">
           <FaUser
-            className="mr-10 hover:text-gray-400 cursor-pointer"
+            className="ml-10 hover:text-gray-400 cursor-pointer"
             onClick={handleLoginClick}
           />
           <FiMenu
