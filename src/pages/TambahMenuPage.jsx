@@ -22,6 +22,8 @@ const TambahMenuPage = () => {
   const [error1, setError1] = useState('');
   const [error2, setError2] = useState('');
   const [error3, setError3] = useState('');
+  const [error4, setError4] = useState('');
+  const [error5, setError5] = useState('');
   const { token } = useSelector((state) => state.auth);
   const nav = useNavigate();
 
@@ -64,6 +66,11 @@ const TambahMenuPage = () => {
     nameMenu == '' ? setError1('Input tidak boleh kosong') : setError1('');
     descMenu == '' ? setError2('Input tidak boleh kosong') : setError2('');
     priceMenu == 0 ? setError3('Input tidak boleh kosong') : setError3('');
+    selectedValue == '' ? setError4('Input tidak boleh kosong') : setError4('');
+    selectedFile == null
+      ? setError5('Input tidak boleh kosong')
+      : setError5('');
+
     if (
       selectedFile !== null &&
       nameMenu !== '' &&
@@ -121,7 +128,7 @@ const TambahMenuPage = () => {
               </label>
               <div
                 className={cn(
-                  'border-dashed border-4 border-brown rounded-[38px] bg-gray-200 p-10 mb-4 w-full h-[250px] flex justify-center items-center',
+                  'border-dashed border-4 border-brown rounded-[38px] bg-gray-200 p-10 mb-4 w-full h-[250px] flex justify-center items-center relative',
                   { 'max-w-[350px]': selectedFile }
                 )}>
                 <input
@@ -151,6 +158,11 @@ const TambahMenuPage = () => {
                     )}
                   </div>
                 </label>
+                {error5 && (
+                  <span className="text-red-500 font-medium text-[18px] absolute -bottom-10">
+                    {error5}
+                  </span>
+                )}
               </div>
             </div>
           </div>
@@ -231,8 +243,8 @@ const TambahMenuPage = () => {
                 )}
               </div>
             </div>
-            <div className="flex flex-row gap-5">
-              <div className="bg-white shadow-md rounded-full w-[11.5rem] h-[3.5rem] mt-[7rem] px-2">
+            <div className="flex flex-row gap-5 ">
+              <div className="bg-white shadow-md rounded-full w-[11.5rem] h-[3.5rem] mt-[7rem] px-2 relative">
                 <Select
                   variant="unstyled"
                   size="xl"
@@ -267,6 +279,11 @@ const TambahMenuPage = () => {
                     },
                   })}
                 />
+                {error4 && (
+                  <span className="text-red-500 font-medium text-[18px] absolute -bottom-16">
+                    {error4}
+                  </span>
+                )}
               </div>
             </div>
           </div>
