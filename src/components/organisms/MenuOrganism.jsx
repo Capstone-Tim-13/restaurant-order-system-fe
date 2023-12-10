@@ -1,14 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import SeachMolecules from '../molecules/SeachMolecules';
 import MenuLinkMolecules from '../molecules/MenuLinkMolecules';
-
-import DEFAULT_PROFILE_ADMIN from '../../assets/images/potato.png';
 import TheadMolecules from '../molecules/TheadMolecules';
 import TbodyMolecules from '../molecules/TbodyMolecules';
 import axios from '../../api/axios';
 import { useSelector } from 'react-redux';
+import formatCategory from '../../utils/formatCategory';
 
-const initalLink = ['Semua Kategori', 'Apprtizer', 'Dessert', 'Ala Carte', 'Paket Hemat', 'Minum'];
+const initalLink = [
+  'Semua Kategori',
+  'Apprtizer',
+  'Dessert',
+  'Ala Carte',
+  'Paket Hemat',
+  'Minum',
+];
 export default function MenuOrganism() {
   const [isActive, setIsActive] = useState('Semua Kategori');
   const [datas, setDatas] = useState([]);
@@ -17,64 +23,30 @@ export default function MenuOrganism() {
   const [isLoading, setIsLoading] = useState(false);
   const { token } = useSelector((state) => state.auth);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        const response = await axios.get('/admin/menu', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const responseData = await response.data;
-        const results = await responseData.results;
-        console.log(results);
-        setDatas(results);
-        setSortedData(results);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [token]);
-
-  // Fungsi Status Produk
-  // const handleStatus = async (id, newStatus) => {
-  //   try {
-  //     const response = await axios.put(
-  //       `/admin/status/${id}`,
-  //       { status: newStatus },
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     );
-  //     console.log(response.data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // fungsi Hapus Data
-  const handleDelete = (id) => {
+  const fetchData = async () => {
+    setIsLoading(true);
     try {
-      axios.delete(`/admin/menu/${id}`, {
+      const response = await axios.get('/admin/menu', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      const deleteData = sortedData.filter((data) => data.id !== id);
-      setSortedData(deleteData);
-      setDatas(deleteData);
-      console.log(deleteData);
+      const responseData = await response.data;
+      const results = await responseData.results;
+      console.log(results);
+      setDatas(results);
+      setSortedData(results);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token]);
 
   // Fungsi Search Product
   const handleChange = (e) => {
@@ -91,18 +63,6 @@ export default function MenuOrganism() {
   // Fungsi Ketika Link Kategori Diklik
   const handleCLickLink = (link) => {
     setIsActive(link);
-  };
-
-  // Format Kategori
-  const categoriMap = {
-    1: 'Apprtizer',
-    2: 'Dessert',
-    3: 'Ala Carte',
-    4: 'Paket Hemat',
-    5: 'Minum',
-  };
-  const formatCategory = (category) => {
-    return categoriMap[category];
   };
 
   // semua Produk
@@ -122,25 +82,46 @@ export default function MenuOrganism() {
 
   // Fungsi Sortir By Date
   const sortByDate = () => {
-    const sortedByDate = [...datas].sort((a, b) => new Date(b.date) - new Date(a.date));
+    const sortedByDate = [...datas].sort(
+      (a, b) => new Date(b.date) - new Date(a.date)
+    );
     setSortedData(sortedByDate);
   };
 
   // Fungsi Sortir Product
   const sortByProduct = (categoryid) => {
-    const sortByKategori = datas.filter((data) => formatCategory(data.categoryid) === categoryid);
+    const sortByKategori = datas.filter(
+      (data) => formatCategory(data.categoryid) === categoryid
+    );
     setSortedData(sortByKategori);
   };
 
   return (
     <div>
-      <SeachMolecules sortByName={sortByName} sortByDate={sortByDate} value={search} handleChange={handleChange} />
+      <SeachMolecules
+        sortByName={sortByName}
+        sortByDate={sortByDate}
+        value={search}
+        handleChange={handleChange}
+      />
       <div className="w-full bg-white rounded-3xl shadow-lg py-[42px] px-[56px] mt-10">
-        <MenuLinkMolecules initalLink={initalLink} allProduct={allProduct} sortByProduct={sortByProduct} handleCLickLink={handleCLickLink} isActive={isActive} />
-
-        <table className={`mt-12 w-full font-poppins text-xl ${isLoading && 'h-1000'}`}>
+        <MenuLinkMolecules
+          initalLink={initalLink}
+          allProduct={allProduct}
+          sortByProduct={sortByProduct}
+          handleCLickLink={handleCLickLink}
+          isActive={isActive}
+        />
+        <table
+          className={`mt-12 w-full font-poppins text-xl ${
+            isLoading && 'h-1000'
+          }`}>
           <TheadMolecules />
-          <TbodyMolecules img={DEFAULT_PROFILE_ADMIN} formatCategory={formatCategory} datas={sortedData} loading={isLoading} handleDelete={handleDelete} handleStatus={handleStatus} />
+          <TbodyMolecules
+            datas={sortedData}
+            loading={isLoading}
+            fetchData={fetchData}
+          />
         </table>
       </div>
     </div>
