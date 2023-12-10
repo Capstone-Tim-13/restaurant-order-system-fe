@@ -9,7 +9,7 @@ export default function RetingAppPublish(props) {
   const [detailReview, setDetailReview] = useState(false);
 
   return (
-    <div className={`w-full mt-10 pb-10 px-10 pt-10 bg-white rounded-2xl shadow-md relative ${detailReview ? '' : 'overflow-hidden h-[945px]'}`}>
+    <div className={`w-full mt-10 pb-10 px-10 pt-10 bg-white rounded-2xl shadow-md relative ${detailReview ? '' : 'overflow-hidden h-[940px]'}`}>
       <h1 className="text-3xl font-semibold font-poppins">Terpublish</h1>
       <button onClick={() => setDetailReview(!detailReview)} className={`fontpopins text-black absolute ${detailReview ? 'bottom-6' : 'bottom-6'} right-10 text-sm font-semibold`}>
         {detailReview ? 'Sembunyikan' : 'Lihat Lainnya'}
