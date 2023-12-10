@@ -1,5 +1,6 @@
 import { Progress } from '@mantine/core';
 import { HiUser } from 'react-icons/hi';
+import formatCurrency from '../../utils/formatCurrency';
 
 export default function CountPetaPelanggan({ title, count, persent, color }) {
   return (
@@ -13,7 +14,7 @@ export default function CountPetaPelanggan({ title, count, persent, color }) {
         <p className="font-medium text-gray-500">{title}</p>
       </div>
       <p className="font-bold" style={{ color: color }}>
-        {count}
+        {formatCurrency(count)}
       </p>
       <Progress color={color} size="sm" value={persent} />
     </div>

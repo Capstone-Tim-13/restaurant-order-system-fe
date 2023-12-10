@@ -12,7 +12,7 @@ export default function ChartPelanggan({
 
   useEffect(() => {
     const data = {
-      labels: Array.from({ length: 30 }, (_, i) => i + 2),
+      labels: pelangganDatas?.map((item) => item.x),
       datasets: [
         {
           type: 'bar',
@@ -76,7 +76,7 @@ export default function ChartPelanggan({
 
     setChartData(data);
     setChartOptions(options);
-  }, [pelangganBaruDatas, pelangganDatas, penjualanDatas]);
+  }, [chartData?.length, pelangganBaruDatas, pelangganDatas, penjualanDatas]);
 
   return (
     <div className="bg-white w-[430px]">
