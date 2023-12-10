@@ -4,47 +4,52 @@ import { RekomendasiTambahMenu } from "../components/organisms/RekomendasiTambah
 import { MENU_ADD_ICON } from "../assets";
 import { MenuArrow } from "../components/molecules/MenuArrow";
 import cn from "../utils/cn";
-import axios from "../api/axios";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import {
+  notifyError,
+  notifyLoading,
+  notifySuccess,
+} from '../components/atoms/Toast';
 
 const TambahMenuPage = () => {
   const [selectedFile, setSelectedFile] = useState(null);
-  const [selectedValue, setSelectedValue] = useState("");
-  const [nameMenu, setNameMenu] = useState("");
-  const [descMenu, setDescMenu] = useState("");
+  const [selectedValue, setSelectedValue] = useState('');
+  const [nameMenu, setNameMenu] = useState('');
+  const [descMenu, setDescMenu] = useState('');
   const [priceMenu, setPriceMenu] = useState(0);
-  const [error1, setError1] = useState("");
-  const [error2, setError2] = useState("");
-  const [error3, setError3] = useState("");
+  const [error1, setError1] = useState('');
+  const [error2, setError2] = useState('');
+  const [error3, setError3] = useState('');
   const { token } = useSelector((state) => state.auth);
   const nav = useNavigate();
 
   const kategoriMenu = [
     {
       id: 1,
-      label: "Appetizer",
-      value: "Appetizer",
+      label: 'Appetizer',
+      value: 'Appetizer',
     },
     {
       id: 2,
-      label: "Dessert",
-      value: "Dessert",
+      label: 'Dessert',
+      value: 'Dessert',
     },
     {
       id: 3,
-      label: "Ala Carte",
-      value: "Ala Carte",
+      label: 'Ala Carte',
+      value: 'Ala Carte',
     },
     {
       id: 4,
-      label: "Paket Hemat",
-      value: "Paket Hemat",
+      label: 'Paket Hemat',
+      value: 'Paket Hemat',
     },
     {
       id: 5,
-      label: "Minum",
-      value: "Minum",
+      label: 'Minum',
+      value: 'Minum',
     },
   ];
 
@@ -52,8 +57,8 @@ const TambahMenuPage = () => {
   const handleFileChange = (e) => {
     setSelectedFile(e.target.files[0]);
   };
-  const handleSelectChange = (value) => {
-    setSelectedValue(value);
+  const handleSelectChange = (id) => {
+    setSelectedValue(id);
   };
   const handleName = (e) => setNameMenu(e.target.value);
   const handleDesc = (e) => setDescMenu(e.target.value);
@@ -63,9 +68,9 @@ const TambahMenuPage = () => {
   const handleSave = async (e) => {
     e.preventDefault();
 
-    nameMenu == "" ? setError1("Input tidak boleh kosong") : setError1("");
-    descMenu == "" ? setError2("Input tidak boleh kosong") : setError2("");
-    priceMenu == 0 ? setError3("Input tidak boleh kosong") : setError3("");
+    nameMenu == '' ? setError1('Input tidak boleh kosong') : setError1('');
+    descMenu == '' ? setError2('Input tidak boleh kosong') : setError2('');
+    priceMenu == 0 ? setError3('Input tidak boleh kosong') : setError3('');
 
     const formData = {
       image: selectedFile,
@@ -74,30 +79,30 @@ const TambahMenuPage = () => {
       category: selectedValue,
       price: priceMenu,
     };
-
-    console.log(formData);
-
     if (
       selectedFile !== null &&
-      nameMenu !== "" &&
-      descMenu !== "" &&
-      selectedValue !== "" &&
+      nameMenu !== '' &&
+      descMenu !== '' &&
+      selectedValue !== '' &&
       priceMenu !== 0
     ) {
+      notifyLoading('Proses menambahkan...', 'tambah-menu');
       try {
-        // const response = await axios.post(
-        //   "https://65742469f941bda3f2af66f9.mockapi.io/addmenu",
-        //   formData
-        // );
-        const response = await axios.post("/admin/menu", formData, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        console.log("Respons server:", response.data);
-        nav("/admin/menu");
+        await axios.post(
+          `${import.meta.env.VITE_APP_SERVER_URL}/admin/create/menu`,
+          formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log(formData);
+        notifySuccess('Menu Berhasil ditambahkan.', 'tambah-menu');
+        nav('/admin/menu');
       } catch (error) {
-        console.log(error);
+        notifyError('Menu Gagal ditambahkan.', 'tambah-menu');
       }
     }
   };
@@ -117,10 +122,9 @@ const TambahMenuPage = () => {
               </label>
               <div
                 className={cn(
-                  "border-dashed border-4 border-brown rounded-[38px] bg-gray-200 p-10 mb-4 w-full h-[250px] flex justify-center items-center",
-                  { "max-w-[350px]": selectedFile }
-                )}
-              >
+                  'border-dashed border-4 border-brown rounded-[38px] bg-gray-200 p-10 mb-4 w-full h-[250px] flex justify-center items-center',
+                  { 'max-w-[350px]': selectedFile }
+                )}>
                 <input
                   type="file"
                   accept=".jpg"
@@ -130,8 +134,7 @@ const TambahMenuPage = () => {
                 />
                 <label
                   htmlFor="file-input"
-                  className="cursor-pointer flex items-center"
-                >
+                  className="cursor-pointer flex items-center">
                   <img
                     src={MENU_ADD_ICON}
                     alt="add-icon"
@@ -163,7 +166,7 @@ const TambahMenuPage = () => {
                   name="menu-name"
                   id=""
                   className={`bg-gray-200 rounded-xl py-5 px-8 mb-2 w-[40rem] focus:outline-none text-[20px] border-red-500 ${
-                    nameMenu.length === "" ? "border-red-700" : "border-none"
+                    nameMenu.length === '' ? 'border-red-700' : 'border-none'
                   }`}
                   placeholder="Nama Menu"
                   value={nameMenu}
@@ -243,25 +246,25 @@ const TambahMenuPage = () => {
                   styles={(theme) => ({
                     item: {
                       // applies styles to selected item
-                      "&[data-selected]": {
-                        "&, &:hover": {
+                      '&[data-selected]': {
+                        '&, &:hover': {
                           backgroundColor:
-                            theme.colorScheme === "dark"
+                            theme.colorScheme === 'dark'
                               ? theme.colors.orange[9]
                               : theme.colors.orange[1],
                           color:
-                            theme.colorScheme === "dark"
+                            theme.colorScheme === 'dark'
                               ? theme.white
                               : theme.colors.dark[9],
                           border:
-                            theme.colorScheme === "dark"
-                              ? "1px solid #E25E3E"
-                              : "1px solid #E25E3E",
+                            theme.colorScheme === 'dark'
+                              ? '1px solid #E25E3E'
+                              : '1px solid #E25E3E',
                         },
                       },
 
                       // applies styles to hovered item (with mouse or keyboard)
-                      "&[data-hovered]": {},
+                      '&[data-hovered]': {},
                     },
                   })}
                 />
