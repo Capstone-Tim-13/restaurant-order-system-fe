@@ -1,8 +1,10 @@
-import React from "react";
-import { Select } from "@mantine/core";
+import { Select } from '@mantine/core';
+import axios from 'axios';
+import { notifyError, notifyLoading, notifySuccess } from '../atoms/Toast';
 
 export const TableBodyProses = ({
   id,
+  idOrder,
   name,
   date,
   address,
@@ -12,12 +14,30 @@ export const TableBodyProses = ({
   total,
   type,
   image,
+  fetchData,
 }) => {
+  const handleUpdatePesanan = async (typeValue) => {
+    notifyLoading('Proses update pesanan...', 'update-pesanan');
+    try {
+      await axios.put(
+        `https://6569e491de53105b0dd7d443.mockapi.io/api/dummy/pesanan/${id}`,
+        {
+          type: typeValue,
+        }
+      );
+      fetchData();
+      notifySuccess('Pesanan berhasil diupdate.', 'update-pesanan');
+    } catch (error) {
+      console.log(error);
+      notifyError('Pesanan gagal diupdate.', 'update-pesanan');
+    }
+  };
+
   return (
     <tr id="pesananmap-proses">
       <td className="px-2"></td>
       <td className="px-2 py-6 text-start whitespace-no-wrap font-normal text-[19px] border-b border-gray-400 text-gray-400">
-        {id}
+        {idOrder}
       </td>
       <td className="px-3 py-6 text-start whitespace-no-wrap border-b border-gray-400">
         <div className="flex flex-col">
@@ -58,29 +78,33 @@ export const TableBodyProses = ({
             styles={(theme) => ({
               item: {
                 // applies styles to selected item
-                "&[data-selected]": {
-                  "&, &:hover": {
+                '&[data-selected]': {
+                  '&, &:hover': {
                     backgroundColor:
-                      theme.colorScheme === "dark"
+                      theme.colorScheme === 'dark'
                         ? theme.colors.orange[9]
                         : theme.colors.orange[1],
                     color:
-                      theme.colorScheme === "dark"
+                      theme.colorScheme === 'dark'
                         ? theme.white
                         : theme.colors.dark[9],
                     border:
-                      theme.colorScheme === "dark"
-                        ? "1px solid #E25E3E"
-                        : "1px solid #E25E3E",
+                      theme.colorScheme === 'dark'
+                        ? '1px solid #E25E3E'
+                        : '1px solid #E25E3E',
                   },
                 },
 
                 // applies styles to hovered item (with mouse or keyboard)
-                "&[data-hovered]": {},
+                '&[data-hovered]': {},
               },
             })}
-            defaultValue={type === "selesai" ? "Diterima" : "Disiapkan"}
-            data={["Disiapkan", "Dipacking", "Dikirim", "Diterima"]}
+            defaultValue={typeCheck(type)}
+            data={['Proses', 'Selesai', 'Batal', 'Pending']}
+            onChange={(e) => {
+              console.log(e);
+              handleUpdatePesanan(typeCheck(e.toLowerCase()).toLowerCase());
+            }}
             className="pl-5 w-[170px] h-[55px] mt-0"
           />
         </div>
@@ -88,4 +112,17 @@ export const TableBodyProses = ({
       <td className="px-2"></td>
     </tr>
   );
+};
+
+const typeCheck = (type) => {
+  switch (type) {
+    case 'selesai':
+      return 'Selesai';
+    case 'proses':
+      return 'Proses';
+    case 'batal':
+      return 'Batal';
+    default:
+      return 'Pending';
+  }
 };
