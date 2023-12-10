@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Switch, Burger, Loader } from '@mantine/core';
 import { DOTS_THREE } from '../../assets';
+import { Link } from 'react-router-dom';
 
 export default function TbodyMolecules(props) {
   const { img, datas, loading } = props;
@@ -42,7 +43,7 @@ export default function TbodyMolecules(props) {
             <div className="relative flex">
               <img src={DOTS_THREE} opened={opened[data.id] || false} onClick={() => toggleRow(data.id)} className="ml-5 w-8 cursor-pointer rounded-full" />
               <div className={`flex flex-col w-28 bg-white rounded-sm shadow-md overflow-hidden absolute -right-32 -top-7 ${opened[data.id] ? 'block' : 'hidden'}`}>
-                <button className="hover:bg-orange hover:text-white px-5 py-2">Edit</button>
+                <Link className="hover:bg-orange hover:text-white px-5 py-2 text-center "to={`/admin/editmenu/${data.id}`}>Edit</Link>
                 <button className="hover:bg-orange hover:text-white px-5 py-2">Hapus</button>
               </div>
             </div>
