@@ -16,7 +16,7 @@ export default function Services() {
 
   return (
     <div className="max-w-[1700px]">
-      <div class="relative w-full  bg-black">
+      <div className="relative w-full  bg-black">
         <img
           src={BG_SERVICES}
           alt="bg_services"
@@ -24,10 +24,10 @@ export default function Services() {
           id="order"
         />
         <div className="absolute top-[400px] left-[200px] w-[950px] transform -translate-x-1/2 -translate-y-1/2 z-10 ">
-          <h1 class="text-[#1d1d1d] ml-96 text-left text-[50px] font-bold">
+          <h1 className="text-[#1d1d1d] ml-96 text-left text-[50px] font-bold">
             Sudah Lapar?
           </h1>
-          <p class="text-[#1d1d1d] ml-96 text-[35px] mt-10 text-left font-medium">
+          <p className="text-[#1d1d1d] ml-96 text-[35px] mt-10 text-left font-medium">
             Yuk, Eksplor lebih banyak lagi menu kami, dan pesan sekarang juga.
             Unduh dulu ya aplikasi nya
           </p>

@@ -13,7 +13,9 @@ export const CardRating = () => {
         const response = await axios.get(api);
         const responseData = await response.data;
         setDatas(responseData);
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     };
     fecthData();
   }, []);
