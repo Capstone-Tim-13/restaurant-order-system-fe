@@ -26,12 +26,23 @@ export default function RetingOrganism() {
         const response = await axios.get(api);
         const responseData = await response.data;
         setDatas(responseData);
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     };
     fecthData();
   }, []);
 
-  // console.log(new Date());
+  const handleDelete = async (id) => {
+    const api = 'https://654b557f5b38a59f28eee3f9.mockapi.io/reting';
+    try {
+      await axios.delete(`${api}/${id}`);
+      const delteData = datas.filter((data) => data.id !== id);
+      window.confirm() ? setDatas(delteData) : '';
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const formatTanggal = (tanggal) => {
     const options = {
@@ -65,8 +76,8 @@ export default function RetingOrganism() {
           ))}
         </div>
 
-        <RetingAplikasi datas={datas} formatTanggal={formatTanggal} />
-        <RetingWebsite datas={datas} formatTanggal={formatTanggal} />
+        <RetingAplikasi handleDelete={handleDelete} datas={datas} formatTanggal={formatTanggal} />
+        <RetingWebsite datas={datas} formatTanggal={formatTanggal} handleDelete={handleDelete} />
       </Tabs>
     </div>
   );

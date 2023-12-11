@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { CHECKLIST_BUTTON, SEND_BUTTON } from '../../assets';
+import { CHECKLIST_BUTTON } from '../../assets';
 import { CloseButton, Rating } from '@mantine/core';
 
 import img from '../../assets/images/potato.png';
 
 export default function RetingWebPublish(props) {
-  const { datas, formatTanggal } = props;
+  const { datas, formatTanggal, handleDelete } = props;
   const [detailReview, setDetailReview] = useState(false);
 
   return (
@@ -22,7 +22,7 @@ export default function RetingWebPublish(props) {
             {/* Bagian Profile User */}
             <div className="w-1/4 flex gap-6 ">
               <div>
-                <img src={img} alt="" className="rounded-full" />
+                <img src={data.avatar} alt="" className="rounded-full" />
               </div>
               <div>
                 <p className="font-poppins text-xl text-orange font-light">#KJL23FS</p>
@@ -45,7 +45,7 @@ export default function RetingWebPublish(props) {
 
               {/* Bagian Button Kategori */}
               <div className="w-1/3 relative flex justify-center items-center">
-                <CloseButton variant="unstyled" className="bg-red-600 text-white font-semibold rounded-full absolute top-4 right-4" />
+                <CloseButton onClick={() => handleDelete(data.id)} variant="unstyled" className="bg-red-600 text-white font-semibold rounded-full absolute top-4 right-4" />
 
                 <button className="flex px-10 py-4 gap-2 bg-gray-300 text-surface font-semibold rounded-full">
                   <img src={CHECKLIST_BUTTON} alt="" />
