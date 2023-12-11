@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { CHECKLIST_BUTTON } from '../../assets';
 import { CloseButton, Rating } from '@mantine/core';
 
-import img from '../../assets/images/potato.png';
-
 export default function RetingWebPublish(props) {
   const { datas, formatTanggal, handleDelete } = props;
   const [detailReview, setDetailReview] = useState(false);
@@ -18,7 +16,7 @@ export default function RetingWebPublish(props) {
       {datas.map((data) => (
         <>
           {/* Bagian Judul */}
-          <div className="mt-10 flex justify-between ">
+          <div key={data.id} className="mt-10 flex justify-between ">
             {/* Bagian Profile User */}
             <div className="w-1/4 flex gap-6 ">
               <div>

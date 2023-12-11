@@ -56,7 +56,6 @@ export default function RetingOrganism() {
     };
 
     const date = new Date(tanggal);
-    console.log(date);
     const formattedDate = date.toLocaleString('id-ID', options).replace(', ', ' ');
     return formattedDate;
   };
