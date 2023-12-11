@@ -29,8 +29,7 @@ export default function DropdownB({ selectedOption, setSelectedOption }) {
           <div className=" flex flex-col w-auto py-3">
             {dataSelect.map((item, index) => (
               <Menu.Item key={index}>
-                <a
-                  href="#"
+                <div
                   onClick={() => setSelectedOption(item)}
                   className={cn(
                     'block px-4 py-2 text-sm font-normal border-b text-gray-700 capitalize',
@@ -41,7 +40,7 @@ export default function DropdownB({ selectedOption, setSelectedOption }) {
                       'font-semibold text-white bg-orange'
                   )}>
                   {item}an
-                </a>
+                </div>
               </Menu.Item>
             ))}
           </div>

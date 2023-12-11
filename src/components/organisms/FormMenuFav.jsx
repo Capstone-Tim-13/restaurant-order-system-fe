@@ -12,7 +12,7 @@ export default function FormMenuFav() {
     const fetch = async () => {
       try {
         const { data } = await axios.get(
-          'https://mocki.io/v1/d112a8cc-9d17-446e-9a42-87049a60a783'
+          'https://mocki.io/v1/0e6a3db9-82f2-473a-b6b0-f79e099aa658'
         );
         setDatasFavorit(data);
       } catch (error) {

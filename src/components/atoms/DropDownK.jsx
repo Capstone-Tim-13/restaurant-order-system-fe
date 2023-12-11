@@ -35,8 +35,7 @@ export default function DropdownK({ selectedCategory, setSelectedCategory }) {
           <div className="flex flex-col w-auto py-3">
             {category.map((item, index) => (
               <Menu.Item key={index}>
-                <a
-                  href="#"
+                <div
                   onClick={() => setSelectedCategory(item)}
                   className={cn(
                     'block px-4 py-2 text-sm font-normal border-b text-gray-700',
@@ -45,7 +44,7 @@ export default function DropdownK({ selectedCategory, setSelectedCategory }) {
                       'font-semibold text-white bg-orange'
                   )}>
                   {item}
-                </a>
+                </div>
               </Menu.Item>
             ))}
           </div>
