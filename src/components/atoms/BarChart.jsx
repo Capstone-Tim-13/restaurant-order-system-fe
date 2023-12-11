@@ -9,15 +9,17 @@ const formatRupiah = (value) => {
   return formatter.format(value);
 };
 
-
 export default function BarChart({ selectedOption, laporan }) {
   const chartRef = useRef(null);
   const chartInstance = useRef(null); // Simpan referensi ke instance diagram.
+  console.log(laporan);
 
   useEffect(() => {
     const data = {
       labels:
-        selectedOption === 'bulan' ? laporan?.bulan.label : laporan?.tahun.label,
+        selectedOption === 'bulan'
+          ? laporan?.bulan.label
+          : laporan?.tahun.label,
       datasets: [
         {
           label: 'Pemasukan',
@@ -73,9 +75,8 @@ export default function BarChart({ selectedOption, laporan }) {
     return () => {
       chartInstance.current.destroy();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedOption]);
 
-  return (
-    <canvas ref={chartRef} width={100} height={50}></canvas>
-  );
+  return <canvas ref={chartRef} width={100} height={50}></canvas>;
 }
