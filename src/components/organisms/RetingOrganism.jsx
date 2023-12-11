@@ -38,7 +38,7 @@ export default function RetingOrganism() {
     try {
       await axios.delete(`${api}/${id}`);
       const delteData = datas.filter((data) => data.id !== id);
-      window.confirm() ? setDatas(delteData) : '';
+      setDatas(delteData);
     } catch (error) {
       console.log(error);
     }

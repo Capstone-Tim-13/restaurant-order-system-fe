@@ -9,7 +9,7 @@ export default function RetingWebPublish(props) {
   const [detailReview, setDetailReview] = useState(false);
 
   return (
-    <div className={`w-full mt-10 pb-10 px-10 pt-10 bg-white rounded-2xl shadow-md relative ${detailReview ? '' : 'overflow-hidden h-[800px]'}`}>
+    <div className={`w-full mt-10 pb-10 px-10 pt-10 bg-white rounded-2xl shadow-md relative ${detailReview ? '' : 'overflow-hidden h-[740px]'}`}>
       <h1 className="text-3xl font-semibold font-poppins">Terpublish</h1>
       <button onClick={() => setDetailReview(!detailReview)} className={`fontpopins text-black absolute ${detailReview ? 'bottom-12' : 'bottom-5'} right-10 text-sm font-semibold`}>
         {detailReview ? 'Sembunyikan' : 'Lihat Lainnya'}
@@ -25,8 +25,8 @@ export default function RetingWebPublish(props) {
                 <img src={data.avatar} alt="" className="rounded-full" />
               </div>
               <div>
-                <p className="font-poppins text-xl text-orange font-light">#KJL23FS</p>
-                <h2 className="font-poppins text-xl font-semibold mt-1">Rizky </h2>
+                <p className="font-poppins text-xl text-orange font-light">#{data.id}</p>
+                <h2 className="font-poppins text-xl font-semibold mt-1">{data.nama}</h2>
                 <p className="font-poppins text-surface font-semibold">{formatTanggal(data.tanggal)}</p>
               </div>
             </div>
@@ -35,8 +35,8 @@ export default function RetingWebPublish(props) {
               {/* Bagian Komentar */}
               <div className="w-2/3">
                 <div className="flex gap-3">
-                  <p className="font-poppins text-surface font-semibold">3.0</p>
-                  <Rating value={3} variant="unstyled" readOnly />
+                  <p className="font-poppins text-surface font-semibold">{data.rating}.0</p>
+                  <Rating value={data.rating} variant="unstyled" readOnly />
                 </div>
                 <div className="mt-3">
                   <p className="font-poppins text-surface font-ligh text-lg">{data.komentar}</p>
