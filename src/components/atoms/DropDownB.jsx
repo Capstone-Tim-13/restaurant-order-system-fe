@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
@@ -6,14 +6,11 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function DropdownB() {
-  const [selectedOption, setSelectedOption] = useState("bulan");
-  // const [showChart, setShowChart] = useState(false);
+export default function DropdownB({selectedOption, setSelectedOption}) {
 
   const handleOptionChange = (option) => {
     console.log("Selected Option:", option);
     setSelectedOption(option);
-    // setShowChart(true);
   };
 
   return (
