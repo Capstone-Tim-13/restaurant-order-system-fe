@@ -13,6 +13,7 @@ export default function SelectMonth({ dateFilter, setDateFilter }) {
           placeholder="Pick month"
           value={dateFilter}
           minDate={new Date(2023, 11, 0)}
+          maxDate={new Date()}
           onChange={setDateFilter}
           className="bg-white p-3 rounded-xl w-max h-max shadow-lg font-poppins font-medium whitespace-nowrap"
         />
