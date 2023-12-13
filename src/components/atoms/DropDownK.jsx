@@ -38,7 +38,7 @@ export default function DropdownK({ selectedCategory, setSelectedCategory }) {
                 <div
                   onClick={() => setSelectedCategory(item)}
                   className={cn(
-                    'block px-4 py-2 text-sm font-normal border-b text-gray-700',
+                    'block px-4 py-2 text-sm font-normal border-b text-gray-700 cursor-pointer',
                     index === category.length - 1 ? 'border-none' : 'border-b',
                     selectedCategory === item &&
                       'font-semibold text-white bg-orange'

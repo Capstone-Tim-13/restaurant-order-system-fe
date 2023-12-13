@@ -10,7 +10,7 @@ export default function DropdownB({ selectedOption, setSelectedOption }) {
     <Menu as="div" className="relative inline-block text-left">
       <div>
         <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-full bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300">
-          {selectedOption === 'bulan' ? 'Bulanan' : 'Tahunan'}
+          Per{selectedOption}
           <ChevronDownIcon
             className="-mr-1 h-5 w-5 text-gray-400"
             aria-hidden="true"
@@ -32,14 +32,14 @@ export default function DropdownB({ selectedOption, setSelectedOption }) {
                 <div
                   onClick={() => setSelectedOption(item)}
                   className={cn(
-                    'block px-4 py-2 text-sm font-normal border-b text-gray-700 capitalize',
+                    'block px-4 py-2 text-sm font-normal border-b text-gray-700 capitalize cursor-pointer',
                     index === dataSelect.length - 1
                       ? 'border-none'
                       : 'border-b',
                     selectedOption === item &&
                       'font-semibold text-white bg-orange'
                   )}>
-                  {item}an
+                  Per{item}
                 </div>
               </Menu.Item>
             ))}
