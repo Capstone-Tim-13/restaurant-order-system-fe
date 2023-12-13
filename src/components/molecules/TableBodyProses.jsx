@@ -100,7 +100,7 @@ export const TableBodyProses = ({
               },
             })}
             defaultValue={typeCheck(type)}
-            data={['Proses', 'Selesai', 'Batal', 'Pending']}
+            data={['Pending', 'Proses', 'Selesai']}
             onChange={(e) => {
               console.log(e);
               handleUpdatePesanan(typeCheck(e.toLowerCase()).toLowerCase());
@@ -120,8 +120,6 @@ const typeCheck = (type) => {
       return 'Selesai';
     case 'proses':
       return 'Proses';
-    case 'batal':
-      return 'Batal';
     default:
       return 'Pending';
   }

@@ -58,7 +58,7 @@ const PesananPage = () => {
 
   const pendingData = filter.filter((item) => item.type === 'pending');
   const prosesData = filter.filter(
-    (item) => item.type === 'proses' || item.type === 'selesai' || item.type === 'batal'
+    (item) => item.type === 'proses' || item.type === 'selesai'
   );
 
   return (
@@ -141,7 +141,7 @@ const PesananPage = () => {
                     price={item.price}
                     satuan={item.satuan}
                     total={item.total}
-                    image={KENTANG_GORENG}
+                    image={item.imgUrl || KENTANG_GORENG}
                     fetchData={fetchData}
                   />
                 );
@@ -194,7 +194,7 @@ const PesananPage = () => {
                       satuan={item.satuan}
                       total={item.total}
                       type={item.type}
-                      image={KENTANG_GORENG}
+                      image={item.imgUrl || KENTANG_GORENG}
                       fetchData={fetchData}
                     />
                   );

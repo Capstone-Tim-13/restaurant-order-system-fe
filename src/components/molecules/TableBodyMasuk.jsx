@@ -24,28 +24,11 @@ export const TableBodyMasuk = ({
           type: 'proses',
         }
       );
-      fetchData()
+      fetchData();
       notifySuccess('Pesanan berhasil diterima.', 'diterima-pesanan');
     } catch (error) {
       console.log(error);
       notifyError('Pesanan gagal diterima.', 'diterima-pesanan');
-    }
-  };
-  const handleBatal = async () => {
-    notifyLoading('Proses batalkan pesanan...', 'dibatalkan-pesanan');
-    console.log({ id });
-    try {
-      await axios.put(
-        `https://6569e491de53105b0dd7d443.mockapi.io/api/dummy/pesanan/${id}`,
-        {
-          type: 'batal',
-        }
-      );
-      fetchData();
-      notifySuccess('Pesanan berhasil dibatalkan.', 'dibatalkan-pesanan');
-    } catch (error) {
-      console.log(error);
-      notifyError('Pesanan gagal dibatalkan.', 'dibatalkan-pesanan');
     }
   };
 
@@ -91,12 +74,6 @@ export const TableBodyMasuk = ({
           className="bg-greenPublish text-white rounded-full font-semibold text-[1rem] py-2 px-4 mr-2"
           onClick={handleTerima}>
           Terima
-        </button>
-        <button
-          type="button"
-          className="bg-red-600 text-white rounded-full font-semibold text-[1rem] py-2 px-4"
-          onClick={handleBatal}>
-          Batal
         </button>
       </td>
       <td className="px-2"></td>
