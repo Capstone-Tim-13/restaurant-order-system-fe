@@ -44,8 +44,7 @@ export default function ListPermintaanPesanan({
           'p-3 w-[120px] text-center rounded-3xl font-semibold capitalize',
           {
             'bg-green-200 text-green-700': type?.toLowerCase() === 'selesai',
-            'bg-red-200 text-red-700': type?.toLowerCase() === 'batal',
-            'bg-orange-200 text-orange-700': type?.toLowerCase() === 'pending',
+            'bg-red-200 text-red-700': type?.toLowerCase() === 'pending',
           }
         )}>
         {type}
