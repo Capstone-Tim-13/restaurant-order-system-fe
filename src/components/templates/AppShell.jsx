@@ -29,7 +29,10 @@ export default function AppShell() {
   useEffect(() => {
     const queryTitle = dataLinks.find((item) => item.link === pathname)?.title;
     setTitle(queryTitle);
-    document.title = 'Alta-Resto | ' + queryTitle;
+    if (queryTitle) {
+      document.title = 'Alta-Resto | ' + queryTitle;
+    }
+    
   }, [pathname]);
 
   if (!isMobile) {
