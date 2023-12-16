@@ -4,8 +4,17 @@ import UploadFile from '../components/organisms/FormUpload';
 import ButtonMenu2 from '../components/atoms/Button2';
 import { BACK_MENU } from '../assets';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { setTitle } from '../store/slices/titleSlice';
+import { useDispatch } from 'react-redux';
 
 export default function MenuConvert() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setTitle('Convert Menu'));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <>
       <Link to="/admin/menu" className="flex items-center">

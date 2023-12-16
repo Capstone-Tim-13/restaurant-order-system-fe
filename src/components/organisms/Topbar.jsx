@@ -1,11 +1,13 @@
-import { MdEmail } from "react-icons/md";
-import { DEFAULT_PROFILE_ADMIN } from "../../assets";
-import NotifikasiPesan from "./NotifikasiPesan";
+import { DEFAULT_PROFILE_ADMIN } from '../../assets';
+import NotifikasiPesan from './NotifikasiPesan';
+import { useSelector } from 'react-redux';
 
 export default function Topbar({ title }) {
+  const store = useSelector((state) => state.title);
+
   return (
     <div className="sticky top-0 w-full h-max bg-white shadow-md z-20 p-8 pl-16 flex items-center justify-between">
-      <h1 className="text-[30px] font-semibold">{title}</h1>
+      <h1 className="text-[30px] font-semibold">{title || store.title}</h1>
       <div className="flex items-center gap-10">
         <div className="flex items-center gap-12 text-brown">
           <NotifikasiPesan />

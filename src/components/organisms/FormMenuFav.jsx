@@ -5,7 +5,10 @@ import { useEffect } from 'react';
 import axios from 'axios';
 
 export default function FormMenuFav() {
-  const [selectedCategory, setSelectedCategory] = useState('Appertizer');
+  const [selectedCategory, setSelectedCategory] = useState({
+    label: 'Appertizer',
+    value: 1,
+  });
   const [datasFavorit, setDatasFavorit] = useState([]);
 
   useEffect(() => {
@@ -23,7 +26,7 @@ export default function FormMenuFav() {
   }, []);
 
   const filterDataCategory = datasFavorit
-    .filter((item) => item.kategori === selectedCategory)
+    .filter((item) => item.kategori === selectedCategory.label)
     .sort((a, b) => b.likes - a.likes);
 
   return (

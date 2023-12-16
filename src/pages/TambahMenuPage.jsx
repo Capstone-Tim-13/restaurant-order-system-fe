@@ -1,9 +1,8 @@
-import { useState } from "react";
-import { Select } from "@mantine/core";
-import { RekomendasiTambahMenu } from "../components/organisms/RekomendasiTambahMenu";
-import { MENU_ADD_ICON } from "../assets";
-import { MenuArrow } from "../components/molecules/MenuArrow";
-import cn from "../utils/cn";
+import { useState } from 'react';
+import { RekomendasiTambahMenu } from '../components/organisms/RekomendasiTambahMenu';
+import { MENU_ADD_ICON } from '../assets';
+import { MenuArrow } from '../components/molecules/MenuArrow';
+import cn from '../utils/cn';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -12,10 +11,15 @@ import {
   notifyLoading,
   notifySuccess,
 } from '../components/atoms/Toast';
+import DropdownK from '../components/atoms/DropDownK';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { setTitle } from '../store/slices/titleSlice';
 
 const TambahMenuPage = () => {
+  const dispatch = useDispatch();
   const [selectedFile, setSelectedFile] = useState(null);
-  const [selectedValue, setSelectedValue] = useState('');
+  const [selectedValue, setSelectedValue] = useState(null);
   const [nameMenu, setNameMenu] = useState('');
   const [descMenu, setDescMenu] = useState('');
   const [priceMenu, setPriceMenu] = useState(0);
@@ -27,28 +31,10 @@ const TambahMenuPage = () => {
   const { token } = useSelector((state) => state.auth);
   const nav = useNavigate();
 
-  const kategoriMenu = [
-    {
-      label: 'Appetizer',
-      value: 1,
-    },
-    {
-      label: 'Dessert',
-      value: 2,
-    },
-    {
-      label: 'Ala Carte',
-      value: 3,
-    },
-    {
-      label: 'Paket Hemat',
-      value: 4,
-    },
-    {
-      label: 'Minum',
-      value: 5,
-    },
-  ];
+  useEffect(() => {
+    dispatch(setTitle('Tambah Menu'));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   //handlechange form
   const handleFileChange = (e) => {
@@ -66,7 +52,9 @@ const TambahMenuPage = () => {
     nameMenu == '' ? setError1('Input tidak boleh kosong') : setError1('');
     descMenu == '' ? setError2('Input tidak boleh kosong') : setError2('');
     priceMenu == 0 ? setError3('Input tidak boleh kosong') : setError3('');
-    selectedValue == '' ? setError4('Input tidak boleh kosong') : setError4('');
+    selectedValue == null
+      ? setError4('Input tidak boleh kosong')
+      : setError4('');
     selectedFile == null
       ? setError5('Input tidak boleh kosong')
       : setError5('');
@@ -75,17 +63,10 @@ const TambahMenuPage = () => {
       selectedFile !== null &&
       nameMenu !== '' &&
       descMenu !== '' &&
-      selectedValue !== '' &&
+      selectedValue !== null &&
       priceMenu !== 0
     ) {
       notifyLoading('Proses menambahkan...', 'tambah-menu');
-      console.log({
-        image: selectedFile,
-        name: nameMenu,
-        description: descMenu,
-        categoryid: selectedValue,
-        price: priceMenu,
-      });
       try {
         await axios.post(
           `${import.meta.env.VITE_APP_SERVER_URL}/admin/create/menu`,
@@ -93,7 +74,7 @@ const TambahMenuPage = () => {
             image: selectedFile,
             name: nameMenu,
             description: descMenu,
-            categoryid: selectedValue,
+            categoryid: selectedValue?.value,
             price: priceMenu,
           },
           {
@@ -118,7 +99,7 @@ const TambahMenuPage = () => {
       <MenuArrow />
       <div className="bg-white rounded-xl shadow my-10 pb-20 ">
         <h1 className="font-medium text-[24px] ml-[3.8rem] pt-8">
-          Detail Menu
+          Tambah Menu
         </h1>
         <div className="flex ml-10 gap-20">
           <div>
@@ -243,48 +224,16 @@ const TambahMenuPage = () => {
                 )}
               </div>
             </div>
-            <div className="flex flex-row gap-5 ">
-              <div className="bg-white shadow-md rounded-full w-[11.5rem] h-[3.5rem] mt-[7rem] px-2 relative">
-                <Select
-                  variant="unstyled"
-                  size="xl"
-                  id="kategori"
-                  data={kategoriMenu}
-                  value={selectedValue}
-                  onChange={(value) => setSelectedValue(value)}
-                  placeholder="Kategori"
-                  className="pl-2.5 w-[11.5rem] h-[55px] mt-0"
-                  styles={(theme) => ({
-                    item: {
-                      // applies styles to selected item
-                      '&[data-selected]': {
-                        '&, &:hover': {
-                          backgroundColor:
-                            theme.colorScheme === 'dark'
-                              ? theme.colors.orange[9]
-                              : theme.colors.orange[1],
-                          color:
-                            theme.colorScheme === 'dark'
-                              ? theme.white
-                              : theme.colors.dark[9],
-                          border:
-                            theme.colorScheme === 'dark'
-                              ? '1px solid #E25E3E'
-                              : '1px solid #E25E3E',
-                        },
-                      },
-
-                      // applies styles to hovered item (with mouse or keyboard)
-                      '&[data-hovered]': {},
-                    },
-                  })}
-                />
-                {error4 && (
-                  <span className="text-red-500 font-medium text-[18px] absolute -bottom-16">
-                    {error4}
-                  </span>
-                )}
-              </div>
+            <div className="relative top-28 left-10">
+              <DropdownK
+                selectedCategory={selectedValue}
+                setSelectedCategory={setSelectedValue}
+              />
+              {error4 && (
+                <span className="text-red-500 font-medium text-[18px] absolute top-14 left-3 whitespace-nowrap">
+                  {error4}
+                </span>
+              )}
             </div>
           </div>
         </div>
