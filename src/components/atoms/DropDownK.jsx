@@ -3,20 +3,35 @@ import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import cn from '../../utils/cn';
 
-export default function DropdownK({ selectedCategory, setSelectedCategory }) {
-  const category = [
-    'Appertizer',
-    'Dessert',
-    'Ala Carte',
-    'Paket Hemat',
-    'Minum',
-  ];
+export const category = [
+  {
+    label: 'Appertizer',
+    value: 1,
+  },
+  {
+    label: 'Dessert',
+    value: 2,
+  },
+  {
+    label: 'Ala Carte',
+    value: 3,
+  },
+  {
+    label: 'Paket Hemat',
+    value: 4,
+  },
+  {
+    label: 'Minum',
+    value: 5,
+  },
+];
 
+export default function DropdownK({ selectedCategory, setSelectedCategory }) {
   return (
-    <Menu as="div" className="relative inline-block text-left">
+    <Menu as="div" className="relative inline-block text-left]">
       <div>
-        <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-full bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-          {selectedCategory}
+        <Menu.Button className="inline-flex w-full justify-between gap-x-1.5 rounded-full bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 min-w-[130px]">
+          {selectedCategory?.label || 'Kategori'}
           <ChevronDownIcon
             className="-mr-1 h-5 w-5 text-gray-400"
             aria-hidden="true"
@@ -40,10 +55,10 @@ export default function DropdownK({ selectedCategory, setSelectedCategory }) {
                   className={cn(
                     'block px-4 py-2 text-sm font-normal border-b text-gray-700 cursor-pointer',
                     index === category.length - 1 ? 'border-none' : 'border-b',
-                    selectedCategory === item &&
+                    selectedCategory?.value === item.value &&
                       'font-semibold text-white bg-orange'
                   )}>
-                  {item}
+                  {item.label}
                 </div>
               </Menu.Item>
             ))}

@@ -1,23 +1,32 @@
-import { useEffect, useState } from "react";
-import { Select } from "@mantine/core";
-import { RekomendasiTambahMenu } from "../components/organisms/RekomendasiTambahMenu"; // Add missing import
-import { MENU_ADD_ICON } from "../assets";
-import { MenuArrow } from "../components/molecules/MenuArrow";
-import cn from "../utils/cn";
-import axios from "../api/axios";
-import { useNavigate, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from 'react';
+import { RekomendasiTambahMenu } from '../components/organisms/RekomendasiTambahMenu'; // Add missing import
+import { MENU_ADD_ICON } from '../assets';
+import { MenuArrow } from '../components/molecules/MenuArrow';
+import cn from '../utils/cn';
+import axios from '../api/axios';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import {
   notifyError,
   notifyLoading,
   notifySuccess,
 } from '../components/atoms/Toast';
 import urlToBlob from '../utils/urlToBlob';
+import DropdownK, { category } from '../components/atoms/DropDownK';
+import { setTitle } from '../store/slices/titleSlice';
+import { useDispatch } from 'react-redux';
 
 export default function EditMenuPage() {
   const navigate = useNavigate();
+    const dispatch = useDispatch();
   const { token } = useSelector((state) => state.auth);
   const { id } = useParams();
+  const [categorySelected, setCategorySelected] = useState(null);
+   const [error1, setError1] = useState('');
+   const [error2, setError2] = useState('');
+   const [error3, setError3] = useState('');
+   const [error4, setError4] = useState('');
+   const [error5, setError5] = useState('');
   const [data, setData] = useState({
     image: null,
     name: '',
@@ -25,13 +34,6 @@ export default function EditMenuPage() {
     categoryid: '',
     price: '0',
   });
-  const categoryMenu = [
-    { id: 1, label: 'Appetizer', value: 'Appetizer' },
-    { id: 2, label: 'Dessert', value: 'Dessert' },
-    { id: 3, label: 'Ala Carte', value: 'Ala Carte' },
-    { id: 4, label: 'Paket Hemat', value: 'Paket Hemat' },
-    { id: 5, label: 'Minum', value: 'Minum' },
-  ];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,34 +49,27 @@ export default function EditMenuPage() {
           ...results,
           image: file,
         });
+        getCategoryValue(results.categoryid);
       } catch (error) {
         console.log(error);
       }
     };
 
+    dispatch(setTitle('Edit Menu'));
     fetchData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, token]);
 
-  const getCategoryValue = (categoryId) => {
-    const category = categoryMenu.find((item) => item.id === categoryId);
-    return category ? category.value : '';
+  const getCategoryValue = (categoryid) => {
+    const categoryResult = category.find((item) => item.value === categoryid);
+    setCategorySelected(categoryResult);
   };
 
   const handleChange = (e) => {
-    if (e.target.name === 'categoryid') {
-      const category = categoryMenu.find(
-        (item) => item.id === parseInt(e.target.value)
-      );
-      setData({
-        ...data,
-        [e.target.name]: category ? category.id : '',
-      });
-    } else {
-      setData({
-        ...data,
-        [e.target.name]: e.target.value,
-      });
-    }
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const handleFileChange = (e) => {
@@ -84,35 +79,46 @@ export default function EditMenuPage() {
     });
   };
 
-  const handleCategoryChange = (value) => {
-    const category = categoryMenu.find((item) => item.value === value);
-    setData({
-      ...data,
-      categoryid: category ? category.id : '',
-    });
-  };
-
   const handleSubmit = async () => {
-    notifyLoading('Proses update menu...', 'edit-menu');
-    try {
-      const formData = new FormData();
-      formData.append('image', data.image || '');
-      formData.append('name', data.name);
-      formData.append('description', data.description);
-      formData.append('categoryid', data.categoryid);
-      formData.append('price', data.price);
+     data.name == '' ? setError1('Input tidak boleh kosong') : setError1('');
+    data.description == '' ? setError2('Input tidak boleh kosong') : setError2('');
+    data.price == 0 ? setError3('Input tidak boleh kosong') : setError3('');
+    data.categoryid == ''
+      ? setError4('Input tidak boleh kosong')
+      : setError4('');
+    data.image == null
+      ? setError5('Input tidak boleh kosong')
+      : setError5('');
 
-      await axios.put(`/admin/update/menu/${id}`, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      notifySuccess('Menu Berhasil diupdate.', 'edit-menu');
-      navigate('/admin/menu');
-    } catch (error) {
-      notifyError('Menu Gagal diupdate.', 'edit-menu');
-      console.log(error.response.data);
+    if (
+      data.image !== null &&
+      data.name !== '' &&
+      data.description !== '' &&
+      data.categoryid !== '' &&
+      data.price !== 0
+    ) {
+      notifyLoading('Proses update menu...', 'edit-menu');
+      console.log(data);
+      try {
+        const formData = new FormData();
+        formData.append('image', data.image || '');
+        formData.append('name', data.name);
+        formData.append('description', data.description);
+        formData.append('categoryid', data.categoryid);
+        formData.append('price', data.price);
+
+        await axios.put(`/admin/update/menu/${id}`, formData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+        notifySuccess('Menu Berhasil diupdate.', 'edit-menu');
+        navigate('/admin/menu');
+      } catch (error) {
+        notifyError('Menu Gagal diupdate.', 'edit-menu');
+        console.log(error.response.data);
+      }
     }
   };
 
@@ -162,6 +168,11 @@ export default function EditMenuPage() {
                     )}
                   </div>
                 </label>
+                {error5 && (
+                  <span className="text-red-500 font-medium text-[18px] absolute -bottom-10">
+                    {error5}
+                  </span>
+                )}
               </div>
             </div>
           </div>
@@ -181,9 +192,16 @@ export default function EditMenuPage() {
                   required
                 />
                 <span className="text-right">{data.name.length}/150</span>
-                {data.name.trim().length > 15 && (
+                {data.name.trim().length > 15 ? (
                   <span className="text-red-500 font-medium text-[18px]">
                     Nama menu lebih dari 15 karakter
+                  </span>
+                ) : (
+                  <span></span>
+                )}
+                {error1 && (
+                  <span className="text-red-500 font-medium text-[18px]">
+                    {error1}
                   </span>
                 )}
               </div>
@@ -205,6 +223,11 @@ export default function EditMenuPage() {
                 <span className="text-right">
                   {data.description.length}/150
                 </span>
+                {error2 && (
+                  <span className="text-red-500 font-medium text-[18px]">
+                    {error2}
+                  </span>
+                )}
               </div>
               <div className="flex flex-col pt-[4rem]">
                 <label htmlFor="" className="text-[20px]">
@@ -224,42 +247,29 @@ export default function EditMenuPage() {
                   max={1000000}
                   required
                 />
+                {error3 && (
+                  <span className="text-red-500 font-medium text-[18px]">
+                    {error3}
+                  </span>
+                )}
               </div>
             </div>
-            <div className="flex flex-row gap-5">
-              <div className="bg-white shadow-md rounded-full w-[11.5rem] h-[3.5rem] mt-[7rem] px-2">
-                <Select
-                  variant="unstyled"
-                  size="xl"
-                  id="kategori"
-                  data={categoryMenu}
-                  placeholder="Kategori"
-                  value={getCategoryValue(data.categoryid)}
-                  className="pl-2.5 w-[11.5rem] h-[55px] mt-0"
-                  styles={(theme) => ({
-                    item: {
-                      '&[data-selected]': {
-                        '&, &:hover': {
-                          backgroundColor:
-                            theme.colorScheme === 'dark'
-                              ? theme.colors.orange[9]
-                              : theme.colors.orange[1],
-                          color:
-                            theme.colorScheme === 'dark'
-                              ? theme.white
-                              : theme.colors.dark[9],
-                          border:
-                            theme.colorScheme === 'dark'
-                              ? '1px solid #E25E3E'
-                              : '1px solid #E25E3E',
-                        },
-                      },
-                      '&[data-hovered]': {},
-                    },
-                  })}
-                  onChange={(value) => handleCategoryChange(value)}
-                />
-              </div>
+            <div className="relative top-28 left-10">
+              <DropdownK
+                selectedCategory={categorySelected}
+                setSelectedCategory={(e) => {
+                  setData({
+                    ...data,
+                    categoryid: e.value,
+                  });
+                  setCategorySelected(e);
+                }}
+              />
+              {error4 && (
+                <span className="text-red-500 font-medium text-[18px] absolute top-14 left-3 whitespace-nowrap">
+                  {error4}
+                </span>
+              )}
             </div>
           </div>
         </div>
